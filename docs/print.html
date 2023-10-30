@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="controllers/deployments.html"><strong aria-hidden="true">1.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="controllers/services.html"><strong aria-hidden="true">2.</strong> Services</a></li><li class="chapter-item expanded "><a href="controllers/jobs.html"><strong aria-hidden="true">3.</strong> Jobs and CronJobs</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="controllers/deployments.html"><strong aria-hidden="true">1.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="controllers/jobs.html"><strong aria-hidden="true">2.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="controllers/daemonsets.html"><strong aria-hidden="true">3.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="controllers/statefulsets.html"><strong aria-hidden="true">4.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="services/nodeport.html"><strong aria-hidden="true">5.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="services/loadbalancers.html"><strong aria-hidden="true">6.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="services/ingresses.html"><strong aria-hidden="true">7.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="services/externalname.html"><strong aria-hidden="true">8.</strong> ExternalName Services</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -200,7 +200,6 @@
 <li>Find other Deployment strategies</li>
 <li>Update Vote deployment to use this strategy and test it</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="services"><a class="header" href="#services">Services</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="jobs-and-cronjobs"><a class="header" href="#jobs-and-cronjobs">Jobs and CronJobs</a></h1>
 <p>Use a CronJob to vote every minute (yeah, that's cheating)</p>
 <h2 id="deploy-cronjob"><a class="header" href="#deploy-cronjob">Deploy CronJob</a></h2>
@@ -213,6 +212,34 @@
 <p>Update your CronJob to run 3 instances of Jobs every minute instead of 1. </p>
 <h2 id="trigger-job-manually-on-demand"><a class="header" href="#trigger-job-manually-on-demand">Trigger Job manually on-demand</a></h2>
 <p>Run a <code>kubectl</code> command to trigger manually Job from CronJob without waiting for schedule time.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="daemonsets"><a class="header" href="#daemonsets">DaemonSets</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="statefulsets"><a class="header" href="#statefulsets">StatefulSets</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="clusterip--nodeport"><a class="header" href="#clusterip--nodeport">ClusterIP &amp; NodePort</a></h1>
+<p>Example Voting App has a few services to access each component.</p>
+<ul>
+<li>Update <code>vote</code> and <code>result</code> service to use <code>NodePort</code> service type such as:
+<pre><code class="language-yaml">spec:
+  type: NodePort
+  ports:
+  - name: &quot;result-service&quot;
+      port: 5001
+      targetPort: 80
+      nodePort: 31001     # Mind port conflict !
+</code></pre>
+</li>
+<li>Access Vote and Result via a web browser using a Node's public IP address or hostname.</li>
+<li>What are <code>port</code>, <code>targetPort</code> and <code>nodePort</code> referring to?</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="loadbalancer"><a class="header" href="#loadbalancer">LoadBalancer</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ingresses"><a class="header" href="#ingresses">Ingresses</a></h1>
+<p>Deploy Ingress with Vote configuration:</p>
+<pre><code>kubectl apply -f resources/ingress.yml
+</code></pre>
+<ul>
+<li>How does the Ingress map domain name <code>vote.k8s.crafteo.io</code> to Vote Service?</li>
+<li>Add a similar configuration for <code>result.k8s.crafteo.io</code> and Result Service</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="externalname-services"><a class="header" href="#externalname-services">ExternalName Services</a></h1>
 
                     </main>
 
@@ -231,22 +258,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
