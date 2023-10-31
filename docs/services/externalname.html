@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="../controllers/deployments.html"><strong aria-hidden="true">1.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="../controllers/jobs.html"><strong aria-hidden="true">2.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="../controllers/daemonsets.html"><strong aria-hidden="true">3.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="../controllers/statefulsets.html"><strong aria-hidden="true">4.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="../services/nodeport.html"><strong aria-hidden="true">5.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="../services/loadbalancers.html"><strong aria-hidden="true">6.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="../services/ingresses.html"><strong aria-hidden="true">7.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="../services/externalname.html" class="active"><strong aria-hidden="true">8.</strong> ExternalName Services</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="../controllers/deployments.html"><strong aria-hidden="true">1.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="../controllers/jobs.html"><strong aria-hidden="true">2.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="../controllers/daemonsets.html"><strong aria-hidden="true">3.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="../controllers/statefulsets.html"><strong aria-hidden="true">4.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="../services/nodeport.html"><strong aria-hidden="true">5.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="../services/loadbalancers.html"><strong aria-hidden="true">6.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="../services/ingresses.html"><strong aria-hidden="true">7.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="../services/externalname.html" class="active"><strong aria-hidden="true">8.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="../services/advanced.html"><strong aria-hidden="true">9.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -175,6 +175,13 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="externalname-services"><a class="header" href="#externalname-services">ExternalName Services</a></h1>
+<p>Create an ExternalName service pointing to google.com:</p>
+<pre><code>kubectl apply -f resources/externalname-service.yml 
+</code></pre>
+<ul>
+<li>Run a shell in the Vote container with <code>kubectl exec</code></li>
+<li>Try to <code>curl https://external-test</code> and observe result</li>
+</ul>
 
                     </main>
 
@@ -184,6 +191,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../services/advanced.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -195,6 +205,9 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../services/advanced.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

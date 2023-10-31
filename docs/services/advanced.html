@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>LoadBalancer - Crafteo - Docker Training</title>
+        <title>Advanced: Endpoints, Headless Service, Service discovery... - Crafteo - Docker Training</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="../controllers/deployments.html"><strong aria-hidden="true">1.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="../controllers/jobs.html"><strong aria-hidden="true">2.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="../controllers/daemonsets.html"><strong aria-hidden="true">3.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="../controllers/statefulsets.html"><strong aria-hidden="true">4.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="../services/nodeport.html"><strong aria-hidden="true">5.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="../services/loadbalancers.html" class="active"><strong aria-hidden="true">6.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="../services/ingresses.html"><strong aria-hidden="true">7.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="../services/externalname.html"><strong aria-hidden="true">8.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="../services/advanced.html"><strong aria-hidden="true">9.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="../controllers/deployments.html"><strong aria-hidden="true">1.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="../controllers/jobs.html"><strong aria-hidden="true">2.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="../controllers/daemonsets.html"><strong aria-hidden="true">3.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="../controllers/statefulsets.html"><strong aria-hidden="true">4.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="../services/nodeport.html"><strong aria-hidden="true">5.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="../services/loadbalancers.html"><strong aria-hidden="true">6.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="../services/ingresses.html"><strong aria-hidden="true">7.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="../services/externalname.html"><strong aria-hidden="true">8.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="../services/advanced.html" class="active"><strong aria-hidden="true">9.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -174,19 +174,50 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="loadbalancer"><a class="header" href="#loadbalancer">LoadBalancer</a></h1>
+                        <h1 id="advanced-services-concepts"><a class="header" href="#advanced-services-concepts">Advanced Services concepts</a></h1>
+<h2 id="endpoints-and-endpointslices"><a class="header" href="#endpoints-and-endpointslices">Endpoints and EndpointSlices</a></h2>
+<p>Services uses EndpointSlices (and Endpoints) under the hood to redirect traffic.</p>
+<ul>
+<li>Scale Vote deployment to 3 replicas</li>
+<li>Identify EndpointSlices and Endpoints created for Vote service</li>
+</ul>
+<p>Historically, Endpoints were used to link Services to Pods. EndpointSlices provide a more complete API and will eventually replace Endpoints. See <a href="https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/#motivation">Kubernetes doc for details</a></p>
+<h2 id="headless-services"><a class="header" href="#headless-services">Headless Services</a></h2>
+<p>Headless services can be used when load balancing is not required for Services. Headless services won't have any IP.</p>
+<p>Using selectors, internal DNS query will directly return all IPs from existing pods.</p>
+<ul>
+<li>Scale Vote and Service deployments to 3 replicas</li>
+<li>Delete Vote service</li>
+<li>Update Vote service template with <code>spec.clusterIP: &quot;None&quot;</code></li>
+<li>Re-deploy Vote service</li>
+<li>Execute a shell in Vote Pod and observe DNS record behavior between <code>vote</code> and <code>result</code> service</li>
+</ul>
+<pre><code># Install DNS utils on the fly for testing
+apt update &amp;&amp; apt install dns-utils
+
+nslookup vote
+nslookup result
+</code></pre>
+<h2 id="service-discovery"><a class="header" href="#service-discovery">Service discovery</a></h2>
+<p>Services are exposed to Pods via environment variables. </p>
+<ul>
+<li>Execute a shell in Vote pod and explore available services
+<ul>
+<li>Use <code>env</code> to show all environment variables, and <code>env | grep</code> to filter</li>
+</ul>
+</li>
+<li>Find Result service environment variables </li>
+</ul>
+<p>A more common approach is to use DNS records pointing to Services.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../services/nodeport.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../services/externalname.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../services/ingresses.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -194,13 +225,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../services/nodeport.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../services/externalname.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../services/ingresses.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>
