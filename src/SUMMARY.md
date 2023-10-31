@@ -4,6 +4,10 @@
 
 # Introduction
 
+- [Our first Pod](intro/pod.md)
+- [Deployment](intro/deployment.md)
+- [Service](intro/service.md)
+
 # Controllers 
 
 - [Deployments & Replica Sets](controllers/deployments.md)

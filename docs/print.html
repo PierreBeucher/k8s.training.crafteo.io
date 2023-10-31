@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="controllers/deployments.html"><strong aria-hidden="true">1.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="controllers/jobs.html"><strong aria-hidden="true">2.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="controllers/daemonsets.html"><strong aria-hidden="true">3.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="controllers/statefulsets.html"><strong aria-hidden="true">4.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="services/nodeport.html"><strong aria-hidden="true">5.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="services/loadbalancers.html"><strong aria-hidden="true">6.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="services/ingresses.html"><strong aria-hidden="true">7.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="services/externalname.html"><strong aria-hidden="true">8.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="services/advanced.html"><strong aria-hidden="true">9.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded "><a href="intro/pod.html"><strong aria-hidden="true">1.</strong> Our first Pod</a></li><li class="chapter-item expanded "><a href="intro/deployment.html"><strong aria-hidden="true">2.</strong> Deployment</a></li><li class="chapter-item expanded "><a href="intro/service.html"><strong aria-hidden="true">3.</strong> Service</a></li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="controllers/deployments.html"><strong aria-hidden="true">4.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="controllers/jobs.html"><strong aria-hidden="true">5.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="controllers/daemonsets.html"><strong aria-hidden="true">6.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="controllers/statefulsets.html"><strong aria-hidden="true">7.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="services/nodeport.html"><strong aria-hidden="true">8.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="services/loadbalancers.html"><strong aria-hidden="true">9.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="services/ingresses.html"><strong aria-hidden="true">10.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="services/externalname.html"><strong aria-hidden="true">11.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="services/advanced.html"><strong aria-hidden="true">12.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -178,6 +178,36 @@
                         <h1 id="crafteo---kubernetes-training"><a class="header" href="#crafteo---kubernetes-training">Crafteo - Kubernetes Training</a></h1>
 <p>Welcome on Kubernetes training exercise book ! Follow link from menu to access modules.</p>
 <p>More info on <a href="https://crafteo.io">crafteo.io</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="our-first-pod-"><a class="header" href="#our-first-pod-">Our first Pod !</a></h1>
+<p>Use <code>kubectl</code> to create a Pod:</p>
+<pre><code class="language-sh">kubectl run mypod --image us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21 --port 8080
+</code></pre>
+<p>This will create a Pod in default namespace. It's like <code>docker run</code> for Kubernetes. </p>
+<p>To reach your Pod externally, use:</p>
+<pre><code class="language-sh">kubectl port-forward pod/mypod 8080:8080
+</code></pre>
+<p>Your Pod is now reachable on port 8080.</p>
+<hr />
+<p>In reality, <code>kubectl run</code> is rarely used. Most of the time <em>YAML Manifests</em> are used to <strong>describe</strong> Kubernetes objects.</p>
+<p>Create a Pod using YAML manifest with:</p>
+<pre><code class="language-sh">kubectl apply -f intro/pod.yml
+</code></pre>
+<p>Delete it with <code>kubectl delete</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="deployment-manage-multiple-pods"><a class="header" href="#deployment-manage-multiple-pods">Deployment: manage multiple Pods</a></h1>
+<p>Deployment manages multiple Pods.</p>
+<ul>
+<li>Create a Deployment with <code>kubectl</code> using manifest <code>intro/deployment.yml</code>. Use <code>kubectl --help</code> or <del>Google</del> DuckDuckGo if needed !</li>
+<li>Restart the Pod</li>
+<li>Update your Deployment to have 3 replicas of our Pod</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="service-accessing-our-pods"><a class="header" href="#service-accessing-our-pods">Service: accessing our Pods</a></h1>
+<ul>
+<li>Create a Service with <code>kubectl</code> using manifest <code>intro/service.yml</code></li>
+<li>Use <code>kubectl port-forward</code> to expose the service locally and test access</li>
+<li>Observe which Pod is reached each time service is used</li>
+<li>How does a Service identify which Pods to serve ?</li>
+<li>Delete Pods, Deployment and Service with a single <code>kubectl</code> command</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deployments"><a class="header" href="#deployments">Deployments</a></h1>
 <h2 id="update-replica-count"><a class="header" href="#update-replica-count">Update replica count</a></h2>
 <ul>
