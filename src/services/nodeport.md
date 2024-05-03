@@ -1,4 +1,4 @@
-# ClusterIP & NodePort
+# NodePort
 
 Example Voting App has a few services to access each component.
 
@@ -10,9 +10,11 @@ Example Voting App has a few services to access each component.
     - name: "result-service"
         port: 5001
         targetPort: 80
-        nodePort: 31001     # Mind port conflict !
+        # Mind port conflict !
+        # Since we're all on the same cluster, 
+        # everyone needs to use different ports. 
+        nodePort: 31001
   ```
 - Access Vote and Result via a web browser using a Node's public IP address or hostname.
+  - Even if Node port is open and listening, we also need a network and firewall rules to accept incoming traffic 
 - What are `port`, `targetPort` and `nodePort` referring to?
-
-Endpoint and EndpointSlices
