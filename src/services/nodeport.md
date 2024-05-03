@@ -13,6 +13,7 @@ Example Voting App has a few services to access each component.
         # Mind port conflict !
         # Since we're all on the same cluster, 
         # everyone needs to use different ports. 
+        # Use a port between 31000 and 36000
         nodePort: 31001
   ```
 - Access Vote and Result via a web browser using a Node's public IP address or hostname.

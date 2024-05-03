@@ -6,6 +6,7 @@
 - Update Vote deployment to 3 replicas. Observe ReplicaSet state.
   - You can `apply` directly or use `kubectl edit`
 - Update Vote deployment back to 1 replica. Observe ReplicaSet state.
+- Update image in Vote Deployment to use non-existing tag instead. Observe ReplicaSet state.
 
 ## Deployment and Pods
 

@@ -175,6 +175,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="statefulsets"><a class="header" href="#statefulsets">StatefulSets</a></h1>
+<p>Deploy a Postgres database as StatefulSet by running command:</p>
+<pre><code>helm install my-postgres oci://registry-1.docker.io/bitnamicharts/postgresql -f resources/postgres-sts-values.yml
+</code></pre>
+<p>This command created a a few StatefulSets. <em>Note: Helm is a package manager for Kubernetes, an equivalent of <code>apt</code> or <code>yum</code> for Linux. We'll come back to Helm later.</em></p>
+<ul>
+<li>Use <code>kubectl</code> to describe Pods and PersistentVolumes. Observe the naming of pods.</li>
+<li>Try to delete a Pod and observe result.</li>
+<li>Delete Postgres Helm chart release with <code>helm delete my-postgres</code>. What happened to volumes?</li>
+</ul>
 
                     </main>
 

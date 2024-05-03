@@ -180,15 +180,24 @@
 </code></pre>
 <p>This will create a Pod in default namespace. It's like <code>docker run</code> for Kubernetes. </p>
 <p>To reach your Pod externally, use:</p>
-<pre><code class="language-sh">kubectl port-forward pod/mypod 8080:8080
+<pre><code class="language-sh">kubectl port-forward pod/mypod --address 0.0.0.0 8081:8080
 </code></pre>
-<p>Your Pod is now reachable on port 8080.</p>
+<p>Your Pod is now reachable on port 8081. Try to reach it locally or via browser:</p>
+<pre><code>curl localhost:8081
+</code></pre>
+<p>This is the equivalent of running Docker command:</p>
+<pre><code class="language-sh">docker run -d -p 8081:81 us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21
+</code></pre>
 <hr />
-<p>In reality, <code>kubectl run</code> is rarely used. Most of the time <em>YAML Manifests</em> are used to <strong>describe</strong> Kubernetes objects.</p>
+<p>In reality, <code>kubectl run</code> is rarely used, except for debug purposes. Most of the time <em>YAML Manifests</em> are used to <strong>describe</strong> Kubernetes objects.</p>
 <p>Create a Pod using YAML manifest with:</p>
 <pre><code class="language-sh">kubectl apply -f intro/pod.yml
 </code></pre>
-<p>Delete it with <code>kubectl delete</code>.</p>
+<ul>
+<li>Use <code>kubectl</code> to get all Pods </li>
+<li>Use <code>kubectl</code> to port-forward pod created via <code>intro/pod.yml</code></li>
+<li>Delete both Pods with <code>kubectl delete</code>.</li>
+</ul>
 
                     </main>
 

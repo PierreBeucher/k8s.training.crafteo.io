@@ -4,11 +4,10 @@ ConfigMap are used to mount configurations or environment variables in Pods and 
 
 # Environment variables
 
-Use ConfigMap `resources/config/configmap-postgres-env.yml` to replace plain environment variables in Deployment
-- Equivalent of `docker run --env-file`
+Database Deployment define environment variables for Postgres user and password. Replace them with those defined in ConfigMap `resources/config/configmap-postgres-env.yml`
 
-Use something like this in Pod template:
-
+- Create ConfigMap with `kubectl apply`
+- Update Deployment to use ConfigMap to load environment variables.  Use something like this in Pod template:
 ```yaml
     envFrom:
     - configMapRef:
@@ -28,10 +27,12 @@ Use something lik this in Pod spec:
       containers:
       - name: postgres
         # [...]
+        # Use custom config file
+        args: [ "-c", "config_file=/etc/postgresql/postgresql.conf"]
+        # Mount custom config in container
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data/postgresql.conf
+        - mountPath: /etc/postgresql
           name: config-vol
-          subPath: postgresql.conf
       volumes:
       - name: config-vol
         configMap:

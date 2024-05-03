@@ -184,15 +184,24 @@
 </code></pre>
 <p>This will create a Pod in default namespace. It's like <code>docker run</code> for Kubernetes. </p>
 <p>To reach your Pod externally, use:</p>
-<pre><code class="language-sh">kubectl port-forward pod/mypod 8080:8080
+<pre><code class="language-sh">kubectl port-forward pod/mypod --address 0.0.0.0 8081:8080
 </code></pre>
-<p>Your Pod is now reachable on port 8080.</p>
+<p>Your Pod is now reachable on port 8081. Try to reach it locally or via browser:</p>
+<pre><code>curl localhost:8081
+</code></pre>
+<p>This is the equivalent of running Docker command:</p>
+<pre><code class="language-sh">docker run -d -p 8081:81 us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21
+</code></pre>
 <hr />
-<p>In reality, <code>kubectl run</code> is rarely used. Most of the time <em>YAML Manifests</em> are used to <strong>describe</strong> Kubernetes objects.</p>
+<p>In reality, <code>kubectl run</code> is rarely used, except for debug purposes. Most of the time <em>YAML Manifests</em> are used to <strong>describe</strong> Kubernetes objects.</p>
 <p>Create a Pod using YAML manifest with:</p>
 <pre><code class="language-sh">kubectl apply -f intro/pod.yml
 </code></pre>
-<p>Delete it with <code>kubectl delete</code>.</p>
+<ul>
+<li>Use <code>kubectl</code> to get all Pods </li>
+<li>Use <code>kubectl</code> to port-forward pod created via <code>intro/pod.yml</code></li>
+<li>Delete both Pods with <code>kubectl delete</code>.</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deployment-manage-multiple-pods"><a class="header" href="#deployment-manage-multiple-pods">Deployment: manage multiple Pods</a></h1>
 <p>Deployment manages multiple Pods.</p>
 <ul>
@@ -224,13 +233,9 @@
 <li><code>kubectl port-forward --help</code> or checkout official doc</li>
 </ul>
 </li>
-<li>Scale deployment to 3 replicas and observe which Pod is reached each time service is used
-<ul>
-<li>Use <code>kubectl apply</code> or <code>kubectl scale --replicas=3 deployment/xxx</code></li>
-</ul>
-</li>
 <li>How does a Service identify which Pods to serve ?</li>
 <li>Delete Pods, Deployment and Service with a single <code>kubectl</code> command</li>
+<li>Re-apply our Deployment, Service and Pod with a single command</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="logs-exec-and-other-basic-operations"><a class="header" href="#logs-exec-and-other-basic-operations">Logs, exec and other basic operations</a></h1>
 <p>Lots of <code>kubectl</code> commands are direct equivalent of their <code>docker</code> / <code>podman</code> counterpart.</p>
@@ -244,7 +249,7 @@
 <li>Run a <code>sh</code>ell session in a Pod's container
 <ul>
 <li>Equivalent of <code>docker exec -it [container] sh</code></li>
-<li>Try to reach a Pod via it's Service DNS record</li>
+<li>Try to reach a Pod via it's Service DNS record (eg. <code>curl &lt;service&gt;.&lt;namespace&gt;.svc.cluster.local</code>)</li>
 </ul>
 </li>
 <li>Get Deployment as YAML
@@ -268,6 +273,7 @@
 </ul>
 </li>
 <li>Update Vote deployment back to 1 replica. Observe ReplicaSet state.</li>
+<li>Update image in Vote Deployment to use non-existing tag instead. Observe ReplicaSet state.</li>
 </ul>
 <h2 id="deployment-and-pods"><a class="header" href="#deployment-and-pods">Deployment and Pods</a></h2>
 <p>How does a Deployment identify which Pods it must manage?</p>
@@ -298,6 +304,15 @@
 <p>Run a <code>kubectl</code> command to trigger manually Job from CronJob without waiting for schedule time.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="daemonsets"><a class="header" href="#daemonsets">DaemonSets</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="statefulsets"><a class="header" href="#statefulsets">StatefulSets</a></h1>
+<p>Deploy a Postgres database as StatefulSet by running command:</p>
+<pre><code>helm install my-postgres oci://registry-1.docker.io/bitnamicharts/postgresql -f resources/postgres-sts-values.yml
+</code></pre>
+<p>This command created a a few StatefulSets. <em>Note: Helm is a package manager for Kubernetes, an equivalent of <code>apt</code> or <code>yum</code> for Linux. We'll come back to Helm later.</em></p>
+<ul>
+<li>Use <code>kubectl</code> to describe Pods and PersistentVolumes. Observe the naming of pods.</li>
+<li>Try to delete a Pod and observe result.</li>
+<li>Delete Postgres Helm chart release with <code>helm delete my-postgres</code>. What happened to volumes?</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nodeport"><a class="header" href="#nodeport">NodePort</a></h1>
 <p>Example Voting App has a few services to access each component.</p>
 <ul>
@@ -311,6 +326,7 @@
       # Mind port conflict !
       # Since we're all on the same cluster, 
       # everyone needs to use different ports. 
+      # Use a port between 31000 and 36000
       nodePort: 31001
 </code></pre>
 </li>
@@ -331,7 +347,7 @@
 </li>
 <li>Observe change in service behavior
 <ul>
-<li>Use <code>kubectl describr|get -o yaml</code> to observe new status</li>
+<li>Use <code>kubectl describe|get -o yaml</code> to observe new status</li>
 </ul>
 </li>
 <li>Change back type to <code>ClusterIP</code> and observe Cloud Load Balancer deletion

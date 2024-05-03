@@ -7,7 +7,6 @@ Manage Services ith manifests and access a Pod via Service
 - Use `kubectl port-forward` to expose the service locally and test access
   - Port forwarding will _forward_ a local port yo tour Pod. Use `curl localhost:PORT` or equivalent. 
   - `kubectl port-forward --help` or checkout official doc
-- Scale deployment to 3 replicas and observe which Pod is reached each time service is used
-  - Use `kubectl apply` or `kubectl scale --replicas=3 deployment/xxx`
 - How does a Service identify which Pods to serve ?
 - Delete Pods, Deployment and Service with a single `kubectl` command
+- Re-apply our Deployment, Service and Pod with a single command
