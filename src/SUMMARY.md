@@ -28,3 +28,8 @@
 
 - [ConfigMap](config/configmap.md)
 - [Secret](config/secret.md)
+
+# Volumes: Persistent & Ephemeral
+
+- [Persistent Volumes: PVC & PV](volumes/pvc.md)
+- [Ephemeral Volumes: emptyDir](volumes/emptydir.md)
