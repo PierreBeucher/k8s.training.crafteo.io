@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded "><a href="intro/pod.html"><strong aria-hidden="true">1.</strong> Our first Pod</a></li><li class="chapter-item expanded "><a href="intro/deployment.html"><strong aria-hidden="true">2.</strong> Deployment</a></li><li class="chapter-item expanded "><a href="intro/service.html"><strong aria-hidden="true">3.</strong> Service</a></li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="controllers/deployments.html"><strong aria-hidden="true">4.</strong> Deployments & Replica Sets</a></li><li class="chapter-item expanded "><a href="controllers/jobs.html"><strong aria-hidden="true">5.</strong> Jobs and CronJobs</a></li><li class="chapter-item expanded "><a href="controllers/daemonsets.html"><strong aria-hidden="true">6.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="controllers/statefulsets.html"><strong aria-hidden="true">7.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="services/nodeport.html"><strong aria-hidden="true">8.</strong> ClusterIP & NodePort</a></li><li class="chapter-item expanded "><a href="services/loadbalancers.html"><strong aria-hidden="true">9.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="services/ingresses.html"><strong aria-hidden="true">10.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="services/externalname.html"><strong aria-hidden="true">11.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="services/advanced.html"><strong aria-hidden="true">12.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded "><a href="intro/pod.html"><strong aria-hidden="true">1.</strong> Our first Pod</a></li><li class="chapter-item expanded "><a href="intro/deployment.html"><strong aria-hidden="true">2.</strong> Deployment</a></li><li class="chapter-item expanded "><a href="intro/service.html"><strong aria-hidden="true">3.</strong> Service</a></li><li class="chapter-item expanded "><a href="intro/logs-exec-others.html"><strong aria-hidden="true">4.</strong> Logs, exec and other operations</a></li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="controllers/deployments.html"><strong aria-hidden="true">5.</strong> Deployments & ReplicaSets</a></li><li class="chapter-item expanded "><a href="controllers/jobs.html"><strong aria-hidden="true">6.</strong> Jobs & CronJobs</a></li><li class="chapter-item expanded "><a href="controllers/daemonsets.html"><strong aria-hidden="true">7.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="controllers/statefulsets.html"><strong aria-hidden="true">8.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="services/nodeport.html"><strong aria-hidden="true">9.</strong> NodePort</a></li><li class="chapter-item expanded "><a href="services/loadbalancers.html"><strong aria-hidden="true">10.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="services/ingresses.html"><strong aria-hidden="true">11.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="services/externalname.html"><strong aria-hidden="true">12.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="services/advanced.html"><strong aria-hidden="true">13.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li><li class="chapter-item expanded affix "><li class="part-title">Configs & Secrets</li><li class="chapter-item expanded "><a href="config/configmap.html"><strong aria-hidden="true">14.</strong> ConfigMap</a></li><li class="chapter-item expanded "><a href="config/secret.html"><strong aria-hidden="true">15.</strong> Secret</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -196,23 +196,77 @@
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deployment-manage-multiple-pods"><a class="header" href="#deployment-manage-multiple-pods">Deployment: manage multiple Pods</a></h1>
 <p>Deployment manages multiple Pods.</p>
 <ul>
-<li>Create a Deployment with <code>kubectl</code> using manifest <code>intro/deployment.yml</code>. Use <code>kubectl --help</code> or <del>Google</del> DuckDuckGo if needed !</li>
-<li>Restart the Pod</li>
+<li>Create a Deployment with <code>kubectl</code> from manifest <code>intro/deployment.yml</code>. 
+<ul>
+<li>Use <code>kubectl --help</code>, a search engine or IA if needed</li>
+<li>Command looks like <code>kubectl apply ...</code></li>
+</ul>
+</li>
+<li>List existing Deployments with <code>kubectl get</code></li>
+<li>Restart the Pod created by our Deployment
+<ul>
+<li>There's no <code>restart</code> command, find another way</li>
+</ul>
+</li>
 <li>Update your Deployment to have 3 replicas of our Pod</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="service-accessing-our-pods"><a class="header" href="#service-accessing-our-pods">Service: accessing our Pods</a></h1>
+<p>Manage Services ith manifests and access a Pod via Service</p>
 <ul>
-<li>Create a Service with <code>kubectl</code> using manifest <code>intro/service.yml</code></li>
-<li>Use <code>kubectl port-forward</code> to expose the service locally and test access</li>
-<li>Observe which Pod is reached each time service is used</li>
+<li>Create a Service with <code>kubectl</code> using manifest <code>intro/service.yml</code>
+<ul>
+<li>Reminder: <code>kubectl apply -f ...</code></li>
+</ul>
+</li>
+<li>Use <code>kubectl port-forward</code> to expose the service locally and test access
+<ul>
+<li>Port forwarding will <em>forward</em> a local port yo tour Pod. Use <code>curl localhost:PORT</code> or equivalent. </li>
+<li><code>kubectl port-forward --help</code> or checkout official doc</li>
+</ul>
+</li>
+<li>Scale deployment to 3 replicas and observe which Pod is reached each time service is used
+<ul>
+<li>Use <code>kubectl apply</code> or <code>kubectl scale --replicas=3 deployment/xxx</code></li>
+</ul>
+</li>
 <li>How does a Service identify which Pods to serve ?</li>
 <li>Delete Pods, Deployment and Service with a single <code>kubectl</code> command</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="logs-exec-and-other-basic-operations"><a class="header" href="#logs-exec-and-other-basic-operations">Logs, exec and other basic operations</a></h1>
+<p>Lots of <code>kubectl</code> commands are direct equivalent of their <code>docker</code> / <code>podman</code> counterpart.</p>
+<ul>
+<li>Show logs for one of your running Pod
+<ul>
+<li>Equivalent of <code>docker logs</code></li>
+<li>You can also target a Deployment or Service</li>
+</ul>
+</li>
+<li>Run a <code>sh</code>ell session in a Pod's container
+<ul>
+<li>Equivalent of <code>docker exec -it [container] sh</code></li>
+<li>Try to reach a Pod via it's Service DNS record</li>
+</ul>
+</li>
+<li>Get Deployment as YAML
+<ul>
+<li>Use an option of <code>kubectl get</code></li>
+</ul>
+</li>
+<li>Describe a Deployment
+<ul>
+<li>Equivalent of <code>docker inspect</code></li>
+</ul>
+</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deployments"><a class="header" href="#deployments">Deployments</a></h1>
 <h2 id="update-replica-count"><a class="header" href="#update-replica-count">Update replica count</a></h2>
 <ul>
 <li>List Deployments with <code>kubectl</code>. Identify the ReplicaSet associated to Vote Deployment. </li>
-<li>Update Vote deployment to 3 replicas. Observe ReplicaSet state.</li>
+<li>Update Vote deployment to 3 replicas. Observe ReplicaSet state.
+<ul>
+<li>You can <code>apply</code> directly or use <code>kubectl edit</code></li>
+</ul>
+</li>
 <li>Update Vote deployment back to 1 replica. Observe ReplicaSet state.</li>
 </ul>
 <h2 id="deployment-and-pods"><a class="header" href="#deployment-and-pods">Deployment and Pods</a></h2>
@@ -244,7 +298,7 @@
 <p>Run a <code>kubectl</code> command to trigger manually Job from CronJob without waiting for schedule time.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="daemonsets"><a class="header" href="#daemonsets">DaemonSets</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="statefulsets"><a class="header" href="#statefulsets">StatefulSets</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="clusterip--nodeport"><a class="header" href="#clusterip--nodeport">ClusterIP &amp; NodePort</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nodeport"><a class="header" href="#nodeport">NodePort</a></h1>
 <p>Example Voting App has a few services to access each component.</p>
 <ul>
 <li>Update <code>vote</code> and <code>result</code> service to use <code>NodePort</code> service type such as:
@@ -254,21 +308,45 @@
   - name: &quot;result-service&quot;
       port: 5001
       targetPort: 80
-      nodePort: 31001     # Mind port conflict !
+      # Mind port conflict !
+      # Since we're all on the same cluster, 
+      # everyone needs to use different ports. 
+      nodePort: 31001
 </code></pre>
 </li>
-<li>Access Vote and Result via a web browser using a Node's public IP address or hostname.</li>
+<li>Access Vote and Result via a web browser using a Node's public IP address or hostname.
+<ul>
+<li>Even if Node port is open and listening, we also need a network and firewall rules to accept incoming traffic </li>
+</ul>
+</li>
 <li>What are <code>port</code>, <code>targetPort</code> and <code>nodePort</code> referring to?</li>
 </ul>
-<p>Endpoint and EndpointSlices</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="loadbalancer"><a class="header" href="#loadbalancer">LoadBalancer</a></h1>
+<p>A LoadBalancer service will provision automatically a Cloud Load Balancer pointing to our Nodes.</p>
+<ul>
+<li>Update Vote service to make it of type <code>LoadBalancer</code>
+<ul>
+<li>You can remove <code>nodePort: xxx</code> from Service definition</li>
+</ul>
+</li>
+<li>Observe change in service behavior
+<ul>
+<li>Use <code>kubectl describr|get -o yaml</code> to observe new status</li>
+</ul>
+</li>
+<li>Change back type to <code>ClusterIP</code> and observe Cloud Load Balancer deletion
+<ul>
+<li>Make sure to do that because Load Balancers cost $$$, thanks :)</li>
+</ul>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ingresses"><a class="header" href="#ingresses">Ingresses</a></h1>
 <p>Deploy Ingress with Vote configuration:</p>
 <pre><code>kubectl apply -f resources/ingress.yml
 </code></pre>
 <ul>
-<li>How does the Ingress map domain name <code>vote.k8s.crafteo.io</code> to Vote Service?</li>
-<li>Add a similar configuration for <code>result.k8s.crafteo.io</code> and Result Service</li>
+<li>How does the Ingress map domain name <code>vote.&lt;YOUR_NAME&gt;.k8s.crafteo.io</code> to Vote Service?</li>
+<li>Add a similar configuration for <code>result.&lt;YOUR_NAME&gt;.k8s.crafteo.io</code> and Result Service</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="externalname-services"><a class="header" href="#externalname-services">ExternalName Services</a></h1>
 <p>Create an ExternalName service pointing to google.com:</p>
@@ -313,6 +391,50 @@ nslookup result
 <li>Find Result service environment variables </li>
 </ul>
 <p>A more common approach is to use DNS records pointing to Services.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configmap"><a class="header" href="#configmap">ConfigMap</a></h1>
+<p>ConfigMap are used to mount configurations or environment variables in Pods and containers.</p>
+<h1 id="environment-variables"><a class="header" href="#environment-variables">Environment variables</a></h1>
+<p>Use ConfigMap <code>resources/config/configmap-postgres-env.yml</code> to replace plain environment variables in Deployment</p>
+<ul>
+<li>Equivalent of <code>docker run --env-file</code></li>
+</ul>
+<p>Use something like this in Pod template:</p>
+<pre><code class="language-yaml">    envFrom:
+    - configMapRef:
+        name: db-env
+</code></pre>
+<h1 id="files-as-volumes"><a class="header" href="#files-as-volumes">Files as Volumes</a></h1>
+<p>Use ConfigMap <code>resources/config/configmap-postgres-config.yml</code> to mount a custom Postgres configuration in container at <code>/etc/postgresql/postgresql.conf</code></p>
+<ul>
+<li>Equivalent of <code>docker run -v &quot;$PWD/my-postgres.conf&quot;:/etc/postgresql/postgresql.conf</code></li>
+</ul>
+<p>Use something lik this in Pod spec:</p>
+<pre><code class="language-yaml">    spec:
+      # [...]
+      containers:
+      - name: postgres
+        # [...]
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data/postgresql.conf
+          name: config-vol
+          subPath: postgresql.conf
+      volumes:
+      - name: config-vol
+        configMap:
+          name: db-config
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="secret"><a class="header" href="#secret">Secret</a></h1>
+<p>Secrets are much like ConfigMaps, except they are (theoretically) encrypted in Control Plane. Their access / usage should be protected with proper authorization in cluster.</p>
+<p>Secrets require their config to be Base64 encoded. Use a command to encode a string in Base64:</p>
+<pre><code>echo -n &quot;mypassword&quot; | base64
+</code></pre>
+<p><em>Note: Base64 is NOT encryption. It should not be used to protect a secret. Base64 is used as secrets can contain binary data and their base64 representation can be used as plain strings.</em></p>
+<h1 id="environment-variables-1"><a class="header" href="#environment-variables-1">Environment variables</a></h1>
+<p>Use Secret <code>resources/config/secret-postgres-env.yml</code> to set environment variables in Deployment</p>
+<h1 id="files-as-volumes-1"><a class="header" href="#files-as-volumes-1">Files as Volumes</a></h1>
+<p>Use Secret <code>resources/config/secret-postgres-config.yml</code> to mount a custom Postgres configuration in container at <code>/etc/postgresql/postgresql.conf</code></p>
+<h1 id="use-plain-string-in-secrets"><a class="header" href="#use-plain-string-in-secrets">Use plain string in secrets?</a></h1>
+<p>Find a way to use plain strings instead of base64 data in your Secret YAML manifest.</p>
 
                     </main>
 
