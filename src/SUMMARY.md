@@ -23,3 +23,8 @@
 - [Ingresses and Ingress Controllers](services/ingresses.md)
 - [ExternalName Services](services/externalname.md)
 - [Advanced: Endpoints, Headless Service, Service discovery...](services/advanced.md)
+
+# Configs & Secrets
+
+- [ConfigMap](config/configmap.md)
+- [Secret](config/secret.md)
