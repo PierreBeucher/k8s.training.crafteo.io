@@ -43,3 +43,6 @@
 # Deploy in Production
 
 - [Ingress & TLS / HTTPS](production/tls.md)
+- [Resources Requests & Limits](production/resources.md)
+- [Horizontal Scalability](production/horizontal-scaling.md)
+- [Vertical Scalability](production/vertical-scaling.md)

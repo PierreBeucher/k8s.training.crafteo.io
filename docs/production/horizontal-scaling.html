@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Ephemeral Volumes: emptyDir - Crafteo - Docker Training</title>
+        <title>Horizontal Scalability - Crafteo - Docker Training</title>
 
 
         <!-- Custom HTML head -->
@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded "><a href="../intro/pod.html"><strong aria-hidden="true">1.</strong> Our first Pod</a></li><li class="chapter-item expanded "><a href="../intro/deployment.html"><strong aria-hidden="true">2.</strong> Deployment</a></li><li class="chapter-item expanded "><a href="../intro/service.html"><strong aria-hidden="true">3.</strong> Service</a></li><li class="chapter-item expanded "><a href="../intro/logs-exec-others.html"><strong aria-hidden="true">4.</strong> Logs, exec and other operations</a></li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="../controllers/deployments.html"><strong aria-hidden="true">5.</strong> Deployments & ReplicaSets</a></li><li class="chapter-item expanded "><a href="../controllers/jobs.html"><strong aria-hidden="true">6.</strong> Jobs & CronJobs</a></li><li class="chapter-item expanded "><a href="../controllers/daemonsets.html"><strong aria-hidden="true">7.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="../controllers/statefulsets.html"><strong aria-hidden="true">8.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="../services/nodeport.html"><strong aria-hidden="true">9.</strong> NodePort</a></li><li class="chapter-item expanded "><a href="../services/loadbalancers.html"><strong aria-hidden="true">10.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="../services/ingresses.html"><strong aria-hidden="true">11.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="../services/externalname.html"><strong aria-hidden="true">12.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="../services/advanced.html"><strong aria-hidden="true">13.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li><li class="chapter-item expanded affix "><li class="part-title">Configs & Secrets</li><li class="chapter-item expanded "><a href="../config/configmap.html"><strong aria-hidden="true">14.</strong> ConfigMap</a></li><li class="chapter-item expanded "><a href="../config/secret.html"><strong aria-hidden="true">15.</strong> Secret</a></li><li class="chapter-item expanded affix "><li class="part-title">Volumes: Persistent & Ephemeral</li><li class="chapter-item expanded "><a href="../volumes/pvc.html"><strong aria-hidden="true">16.</strong> Persistent Volumes: PVC & PV</a></li><li class="chapter-item expanded "><a href="../volumes/emptydir.html" class="active"><strong aria-hidden="true">17.</strong> Ephemeral Volumes: emptyDir</a></li><li class="chapter-item expanded affix "><li class="part-title">Deployment tools</li><li class="chapter-item expanded "><a href="../deploy-tools/helm-intro.html"><strong aria-hidden="true">18.</strong> Helm: introduction</a></li><li class="chapter-item expanded "><a href="../deploy-tools/helm-advanced.html"><strong aria-hidden="true">19.</strong> Helm: advanced</a></li><li class="chapter-item expanded "><a href="../deploy-tools/kustomize.html"><strong aria-hidden="true">20.</strong> Kustomize</a></li><li class="chapter-item expanded affix "><li class="part-title">Deploy in Production</li><li class="chapter-item expanded "><a href="../production/tls.html"><strong aria-hidden="true">21.</strong> Ingress & TLS / HTTPS</a></li><li class="chapter-item expanded "><a href="../production/resources.html"><strong aria-hidden="true">22.</strong> Resources Requests & Limits</a></li><li class="chapter-item expanded "><a href="../production/horizontal-scaling.html"><strong aria-hidden="true">23.</strong> Horizontal Scalability</a></li><li class="chapter-item expanded "><a href="../production/vertical-scaling.html"><strong aria-hidden="true">24.</strong> Vertical Scalability</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../welcome.html">Crafteo - Kubernetes Training</a></li><li class="chapter-item expanded affix "><li class="part-title">Introduction</li><li class="chapter-item expanded "><a href="../intro/pod.html"><strong aria-hidden="true">1.</strong> Our first Pod</a></li><li class="chapter-item expanded "><a href="../intro/deployment.html"><strong aria-hidden="true">2.</strong> Deployment</a></li><li class="chapter-item expanded "><a href="../intro/service.html"><strong aria-hidden="true">3.</strong> Service</a></li><li class="chapter-item expanded "><a href="../intro/logs-exec-others.html"><strong aria-hidden="true">4.</strong> Logs, exec and other operations</a></li><li class="chapter-item expanded affix "><li class="part-title">Controllers</li><li class="chapter-item expanded "><a href="../controllers/deployments.html"><strong aria-hidden="true">5.</strong> Deployments & ReplicaSets</a></li><li class="chapter-item expanded "><a href="../controllers/jobs.html"><strong aria-hidden="true">6.</strong> Jobs & CronJobs</a></li><li class="chapter-item expanded "><a href="../controllers/daemonsets.html"><strong aria-hidden="true">7.</strong> DaemonSets</a></li><li class="chapter-item expanded "><a href="../controllers/statefulsets.html"><strong aria-hidden="true">8.</strong> StatefulSets</a></li><li class="chapter-item expanded affix "><li class="part-title">Services & Networking</li><li class="chapter-item expanded "><a href="../services/nodeport.html"><strong aria-hidden="true">9.</strong> NodePort</a></li><li class="chapter-item expanded "><a href="../services/loadbalancers.html"><strong aria-hidden="true">10.</strong> LoadBalancer</a></li><li class="chapter-item expanded "><a href="../services/ingresses.html"><strong aria-hidden="true">11.</strong> Ingresses and Ingress Controllers</a></li><li class="chapter-item expanded "><a href="../services/externalname.html"><strong aria-hidden="true">12.</strong> ExternalName Services</a></li><li class="chapter-item expanded "><a href="../services/advanced.html"><strong aria-hidden="true">13.</strong> Advanced: Endpoints, Headless Service, Service discovery...</a></li><li class="chapter-item expanded affix "><li class="part-title">Configs & Secrets</li><li class="chapter-item expanded "><a href="../config/configmap.html"><strong aria-hidden="true">14.</strong> ConfigMap</a></li><li class="chapter-item expanded "><a href="../config/secret.html"><strong aria-hidden="true">15.</strong> Secret</a></li><li class="chapter-item expanded affix "><li class="part-title">Volumes: Persistent & Ephemeral</li><li class="chapter-item expanded "><a href="../volumes/pvc.html"><strong aria-hidden="true">16.</strong> Persistent Volumes: PVC & PV</a></li><li class="chapter-item expanded "><a href="../volumes/emptydir.html"><strong aria-hidden="true">17.</strong> Ephemeral Volumes: emptyDir</a></li><li class="chapter-item expanded affix "><li class="part-title">Deployment tools</li><li class="chapter-item expanded "><a href="../deploy-tools/helm-intro.html"><strong aria-hidden="true">18.</strong> Helm: introduction</a></li><li class="chapter-item expanded "><a href="../deploy-tools/helm-advanced.html"><strong aria-hidden="true">19.</strong> Helm: advanced</a></li><li class="chapter-item expanded "><a href="../deploy-tools/kustomize.html"><strong aria-hidden="true">20.</strong> Kustomize</a></li><li class="chapter-item expanded affix "><li class="part-title">Deploy in Production</li><li class="chapter-item expanded "><a href="../production/tls.html"><strong aria-hidden="true">21.</strong> Ingress & TLS / HTTPS</a></li><li class="chapter-item expanded "><a href="../production/resources.html"><strong aria-hidden="true">22.</strong> Resources Requests & Limits</a></li><li class="chapter-item expanded "><a href="../production/horizontal-scaling.html" class="active"><strong aria-hidden="true">23.</strong> Horizontal Scalability</a></li><li class="chapter-item expanded "><a href="../production/vertical-scaling.html"><strong aria-hidden="true">24.</strong> Vertical Scalability</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -174,28 +174,39 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="emptydir-volume"><a class="header" href="#emptydir-volume">emptyDir volume</a></h1>
-<p><code>emptyDir</code> can be used in various situation, such as sharing data between container of the same Pod. For example to create a backup of database with a <code>postgres</code> container and upload result to AWS S3 with <code>aws-cli</code> container:</p>
-<p>A backup CronJob is present at <code>resources/volumes/cronjob.yml</code> but lacks Volume configs. Adapt template to:</p>
-<ul>
-<li>Declare an <code>emptyDir</code> volume (use <code>volumes:</code> in appropriate place)</li>
-<li>Mount the volume at <code>/backup</code> for both containers </li>
-<li>Create the CronJob and trigger it (create a Job from the CronJob) with
-<pre><code class="language-sh">kubectl create job --from=cronjob/postgres-backup manual-backup
+                        <h1 id="horizontal-scalability-and-horizontal-pod-autoscaler-hpa"><a class="header" href="#horizontal-scalability-and-horizontal-pod-autoscaler-hpa">Horizontal Scalability and Horizontal Pod Autoscaler (HPA)</a></h1>
+<p>Let's configure an Horizontal Pod Autoscaler (HPA) to automatically scale our Vote Pods when their CPU load is high. We'll use a Auto Voter Pod to emulate a CPU charge (lots of vote !)</p>
+<p>Update Vote deployment to specify resources and requests such as:</p>
+<pre><code class="language-yaml">        resources:
+          requests:
+            cpu: 50m
+            memory: 128Mi
+          limits:
+            cpu: 100m
+            memory: 256Mi
 </code></pre>
-</li>
-<li>Observe the result </li>
+<p>Deploy Auto Voter: <code>kubectl apply -f resources/scaling/auto-voter.yml</code></p>
+<ul>
+<li>It's a simple bash loop sending POST request to Vote service.</li>
+<li>Observe Vote CPU load with <code>kubectl top</code> command (CPU load is ~2m idle, and should now be around ~50m). For example:</li>
 </ul>
+<pre><code class="language-sh">watch kubectl top pod vote-xxx
+</code></pre>
+<p>Deploy HPA in <code>resources/scaling/hpa.yml</code> and observe scalability</p>
+<ul>
+<li>How does HPA know when a pod should be scaled-up?</li>
+</ul>
+<p>Delete Auto Voter and observe HPA scale down. </p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../volumes/pvc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../production/resources.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../deploy-tools/helm-intro.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../production/vertical-scaling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -205,11 +216,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../volumes/pvc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../production/resources.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../deploy-tools/helm-intro.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../production/vertical-scaling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
