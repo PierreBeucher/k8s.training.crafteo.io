@@ -1,26 +1,34 @@
 # Our first Pod !
 
-Use `kubectl` to create a Pod:
+Let's create our first Pod. 
+
+Start by creating a _Namespace_. A Namespaces is like an independent place where our Pod will be created in Kubernetes cluster to avoid conflict with other objects:
 
 ```sh
-kubectl run mypod --image us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21 --port 8080
+kubectl create namespace <your_ns>
 ```
 
-This will create a Pod in default namespace. It's like `docker run` for Kubernetes. 
+Then create a Pod in our namespace (`-n` flag specify namespace to use):
+
+```sh
+kubectl -n <your_ns> run mypod --image us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21 --port 8080
+```
+
+It's like `docker run` for Kubernetes. 
 
 To reach your Pod externally, use:
 
 ```sh
-kubectl port-forward pod/mypod --address 0.0.0.0 8081:8080
+kubectl -n <your_ns> port-forward pod/mypod --address 0.0.0.0 8081:8080
 ```
 
 Your Pod is now reachable on port 8081. Try to reach it locally or via browser:
 
-```
-curl localhost:8081
+```sh
+curl YOU.training.crafteo.io:8081
 ```
 
-This is the equivalent of running Docker command:
+This is the equivalent running Docker command below, except our Pod (and container) are not reachable locally but only within the Kubernetes cluster. 
 
 ```sh
 docker run -d -p 8081:81 us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21
@@ -33,9 +41,19 @@ In reality, `kubectl run` is rarely used, except for debug purposes. Most of the
 Create a Pod using YAML manifest with:
 
 ```sh
-kubectl apply -f intro/pod.yml
+kubectl -n <your_ns> apply -f intro/pod.yml
 ```
 
-- Use `kubectl` to get all Pods 
-- Use `kubectl` to port-forward pod created via `intro/pod.yml`
-- Delete both Pods with `kubectl delete`.
+Now, use `kubectl` commands to:
+
+- Get all Pods 
+- Port-forward pod created via `intro/pod.yml`
+- Delete both Pods with `kubectl delete`
+
+---
+
+By default `kubectl` fetch Pods (and other objects) in the `default` namespace. You can change this behavior with:
+
+```sh
+kubectl config set-context --current --namespace pierre
+```
