@@ -8,5 +8,8 @@ Manage Services ith manifests and access a Pod via Service
   - Port forwarding will _forward_ a local port yo tour Pod. Use `curl localhost:PORT` or equivalent. 
   - `kubectl port-forward --help` or checkout official doc
 - How does a Service identify which Pods to serve ?
+
+---
+
 - Delete Pods, Deployment and Service with a single `kubectl` command
 - Re-apply our Deployment, Service and Pod with a single command
