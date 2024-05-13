@@ -179,29 +179,38 @@
 <p>Welcome on Kubernetes training exercise book ! Follow link from menu to access modules.</p>
 <p>More info on <a href="https://crafteo.io">crafteo.io</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="our-first-pod-"><a class="header" href="#our-first-pod-">Our first Pod !</a></h1>
-<p>Use <code>kubectl</code> to create a Pod:</p>
-<pre><code class="language-sh">kubectl run mypod --image us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21 --port 8080
+<p>Let's create our first Pod. </p>
+<p>Start by creating a <em>Namespace</em>. A Namespaces is like an independent place where our Pod will be created in Kubernetes cluster to avoid conflict with other objects:</p>
+<pre><code class="language-sh">kubectl create namespace &lt;your_ns&gt;
 </code></pre>
-<p>This will create a Pod in default namespace. It's like <code>docker run</code> for Kubernetes. </p>
+<p>Then create a Pod in our namespace (<code>-n</code> flag specify namespace to use):</p>
+<pre><code class="language-sh">kubectl -n &lt;your_ns&gt; run mypod --image us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21 --port 8080
+</code></pre>
+<p>It's like <code>docker run</code> for Kubernetes. </p>
 <p>To reach your Pod externally, use:</p>
-<pre><code class="language-sh">kubectl port-forward pod/mypod --address 0.0.0.0 8081:8080
+<pre><code class="language-sh">kubectl -n &lt;your_ns&gt; port-forward pod/mypod --address 0.0.0.0 8081:8080
 </code></pre>
 <p>Your Pod is now reachable on port 8081. Try to reach it locally or via browser:</p>
-<pre><code>curl localhost:8081
+<pre><code class="language-sh">curl YOU.training.crafteo.io:8081
 </code></pre>
-<p>This is the equivalent of running Docker command:</p>
+<p>This is the equivalent running Docker command below, except our Pod (and container) are not reachable locally but only within the Kubernetes cluster. </p>
 <pre><code class="language-sh">docker run -d -p 8081:81 us-docker.pkg.dev/google-samples/containers/gke/whereami:v1.2.21
 </code></pre>
 <hr />
 <p>In reality, <code>kubectl run</code> is rarely used, except for debug purposes. Most of the time <em>YAML Manifests</em> are used to <strong>describe</strong> Kubernetes objects.</p>
 <p>Create a Pod using YAML manifest with:</p>
-<pre><code class="language-sh">kubectl apply -f intro/pod.yml
+<pre><code class="language-sh">kubectl -n &lt;your_ns&gt; apply -f intro/pod.yml
 </code></pre>
+<p>Now, use <code>kubectl</code> commands to:</p>
 <ul>
-<li>Use <code>kubectl</code> to get all Pods </li>
-<li>Use <code>kubectl</code> to port-forward pod created via <code>intro/pod.yml</code></li>
-<li>Delete both Pods with <code>kubectl delete</code>.</li>
+<li>Get all Pods </li>
+<li>Port-forward pod created via <code>intro/pod.yml</code></li>
+<li>Delete both Pods with <code>kubectl delete</code></li>
 </ul>
+<hr />
+<p>By default <code>kubectl</code> fetch Pods (and other objects) in the <code>default</code> namespace. You can change this behavior with:</p>
+<pre><code class="language-sh">kubectl config set-context --current --namespace pierre
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deployment-manage-multiple-pods"><a class="header" href="#deployment-manage-multiple-pods">Deployment: manage multiple Pods</a></h1>
 <p>Deployment manages multiple Pods.</p>
 <ul>
@@ -234,6 +243,9 @@
 </ul>
 </li>
 <li>How does a Service identify which Pods to serve ?</li>
+</ul>
+<hr />
+<ul>
 <li>Delete Pods, Deployment and Service with a single <code>kubectl</code> command</li>
 <li>Re-apply our Deployment, Service and Pod with a single command</li>
 </ul>
@@ -246,10 +258,10 @@
 <li>You can also target a Deployment or Service</li>
 </ul>
 </li>
-<li>Run a <code>sh</code>ell session in a Pod's container
+<li>Run a <code>sh</code> session in a Pod's container
 <ul>
 <li>Equivalent of <code>docker exec -it [container] sh</code></li>
-<li>Try to reach a Pod via it's Service DNS record (eg. <code>curl &lt;service&gt;.&lt;namespace&gt;.svc.cluster.local</code>)</li>
+<li>From within Pod, try to reach a Pod via it's Service DNS record (eg. <code>curl &lt;service&gt;.&lt;namespace&gt;.svc.cluster.local</code>) specyfing the proper port.</li>
 </ul>
 </li>
 <li>Get Deployment as YAML

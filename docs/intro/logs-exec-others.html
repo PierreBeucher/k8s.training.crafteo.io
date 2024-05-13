@@ -183,10 +183,10 @@
 <li>You can also target a Deployment or Service</li>
 </ul>
 </li>
-<li>Run a <code>sh</code>ell session in a Pod's container
+<li>Run a <code>sh</code> session in a Pod's container
 <ul>
 <li>Equivalent of <code>docker exec -it [container] sh</code></li>
-<li>Try to reach a Pod via it's Service DNS record (eg. <code>curl &lt;service&gt;.&lt;namespace&gt;.svc.cluster.local</code>)</li>
+<li>From within Pod, try to reach a Pod via it's Service DNS record (eg. <code>curl &lt;service&gt;.&lt;namespace&gt;.svc.cluster.local</code>) specyfing the proper port.</li>
 </ul>
 </li>
 <li>Get Deployment as YAML
