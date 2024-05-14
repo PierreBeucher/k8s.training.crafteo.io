@@ -182,9 +182,9 @@
 <li>Verify it works via port-forward</li>
 <li>Explore YAML templates to understand templating mechanisms and its connection to <code>values.yml</code></li>
 </ul>
-<p>You can override <code>values.ym</code>l with external configuration files, typically by environment.</p>
+<p>You can override <code>values.yml</code> with external configuration files, typically by environment.</p>
 <ul>
-<li>Update your release to override the default values using resources/helm/values/dev.yml</li>
+<li>Update your release to override the default values using <code>resources/helm/values/dev.yml</code></li>
 </ul>
 <h2 id="secrets-management"><a class="header" href="#secrets-management">Secrets Management</a></h2>
 <p>Helm doesn't provide a native mechanism for managing secrets. A common pattern is to reference an external secret (not managed by the chart).</p>

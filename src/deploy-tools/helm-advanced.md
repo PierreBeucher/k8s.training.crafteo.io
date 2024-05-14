@@ -8,8 +8,8 @@ Use `helm install` command to deploy a release of the Example Voting App chart.
 - Verify it works via port-forward
 - Explore YAML templates to understand templating mechanisms and its connection to `values.yml`
 
-You can override `values.ym`l with external configuration files, typically by environment.
-- Update your release to override the default values using resources/helm/values/dev.yml
+You can override `values.yml` with external configuration files, typically by environment.
+- Update your release to override the default values using `resources/helm/values/dev.yml`
 
 ## Secrets Management
 
