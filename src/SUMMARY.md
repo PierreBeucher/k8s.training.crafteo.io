@@ -46,3 +46,9 @@
 - [Resources Requests & Limits](production/resources.md)
 - [Horizontal Scalability](production/horizontal-scaling.md)
 - [Vertical Scalability](production/vertical-scaling.md)
+
+# Scheduling
+
+- [Introduction](scheduling/intro.md)
+- [Inter-pod affinity](scheduling/inter-pod-affinity.md)
+- [Topology Spread Constraint](scheduling/topology-spread-constraint.md)
