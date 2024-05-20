@@ -47,6 +47,7 @@
 - [Horizontal Scalability](production/horizontal-scaling.md)
 - [Vertical Scalability](production/vertical-scaling.md)
 - [Liveness, Readiness and Startup Probes](production/probes.md)
+- [Pod Disruption Budget (PDB)](production/pdb.md)
 
 # Scheduling
 
