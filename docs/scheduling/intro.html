@@ -212,7 +212,7 @@
 <ul>
 <li>Require Pods to be scheduled in Zone <code>eu-west-3b</code> (use label <code>topology.kubernetes.io/zone: eu-west-3b</code>)</li>
 <li>Prefer Pods to be scheduled on a specific <code>kubernetes.io/hostname</code></li>
-<li>If your Deployment or Pods are stuck fo some reason, delete Depoyment and and re-create it</li>
+<li>If your Deployment or Pods are stuck fo some reason, delete Deployment and and re-create it</li>
 </ul>
 <p>Apply changes and observe Pod scheduling behavior. Destroy all Vote's Pods and observe their scheduling. </p>
 
@@ -245,22 +245,6 @@
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

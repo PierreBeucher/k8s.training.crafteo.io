@@ -41,6 +41,6 @@ spec:
 Update Vote Deployment to:
 - Require Pods to be scheduled in Zone `eu-west-3b` (use label `topology.kubernetes.io/zone: eu-west-3b`)
 - Prefer Pods to be scheduled on a specific `kubernetes.io/hostname`
-- If your Deployment or Pods are stuck fo some reason, delete Depoyment and and re-create it
+- If your Deployment or Pods are stuck fo some reason, delete Deployment and and re-create it
 
 Apply changes and observe Pod scheduling behavior. Destroy all Vote's Pods and observe their scheduling. 
