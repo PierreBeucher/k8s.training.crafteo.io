@@ -4,6 +4,35 @@
 
 Source: [official doc](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity)
 
+## Spread Pods on Nodes
+
+Context: you want to spread Vote Pods on your nodes to even load and improve redundancy and resilience. 
+
+Prefer scheduling Vote Pods on Node which doesn't already have one using an affinity such as:
+
+```yml
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: "kubernetes.io/hostname"
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - vote
+            namespaceSelector:
+              matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: In
+                values:
+                  - <YOUR NAME>
+```
+
+## Deploy Pods together
+
+Context: for better performance, you want to have Redis Pods as close as possible to Vote Pods by preferring spreading Redis Pods on Nodes and preferring Vote Pods to deploy on a Node already running a Redis Pod (so that cache can be reached on the same Node, reducing network latency). 
+
 Inter-pod anti-affinity:
 - Configure Redis Deployment to **prefer** scheduling on Nodes without a Redis Pod already running.
 
