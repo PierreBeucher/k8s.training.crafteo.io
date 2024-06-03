@@ -849,6 +849,19 @@ kubectl drain ip-192-168-1-160.eu-west-3.compute.internal --delete-emptydir-data
 </ul>
 <p>Play with replicas on Redis and Vote deployment to observe results.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="topology-spread-constraint"><a class="header" href="#topology-spread-constraint">Topology Spread Constraint</a></h1>
+<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/">Topology Spread Constraints</a> allow you to spread workload across domains. It's useful to better achieve HA while being easier to use than Affinity. </p>
+<p><code>topologySpreadConstraints</code> uses <code>topologyKey</code> to spread Pods around the domains matching given key, for example:</p>
+<pre><code class="language-yaml">    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: vote
+</code></pre>
+<p>Will spread Vote Pods across the Zone Domain. </p>
+<p>Update Vote Deployment to even loads in current region. </p>
+<p>What's the behavior of <code>topologySpreadConstraints</code> in relation to Node/Pod Affinity ? </p>
 
                     </main>
 
