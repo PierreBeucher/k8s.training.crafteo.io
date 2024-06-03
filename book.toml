@@ -9,4 +9,4 @@ title = "Crafteo - Kubernetes Training"
 build-dir = "docs"
 
 [output.html]
-git-repository-url = "https://github.com/PierreBeucher/docker.training.crafteo.io"
+git-repository-url = "https://github.com/PierreBeucher/k8s.training.crafteo.io"

@@ -5,7 +5,7 @@ Pod scheduling allow to specify Nodes constraints on which Pod will be scheduled
 ## Node selector: affect Pods directly to Node(s)
 
 Use `nodeSelector` to assign Vote Deployment's Pods to a given Node using the `kubernetes.io/hostname` label.
-- Use `kubectl describe node` to identify suotable Node labels
+- Use `kubectl describe node` to identify suitable Node labels
 - Update Vote Deployment to defne `nodeSelector` and apply
 
 ## Affinity and anti-affinity
