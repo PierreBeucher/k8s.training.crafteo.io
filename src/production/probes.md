@@ -36,4 +36,4 @@ Describe Vote service and verify that no traffic is routed to non-Ready Pod.
 
 ## Startup probe
 
-Add a Readiness Probe on Vote container (keep Liveness and Readiness Probes). Use a similar method as before to test behavior.
+Add a Startup Probe on Vote container (keep Liveness and Readiness Probes). Use a similar method as before to test behavior.

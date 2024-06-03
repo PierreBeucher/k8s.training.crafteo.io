@@ -3,7 +3,7 @@ authors = ["Pierre Beucher"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Crafteo - Docker Training"
+title = "Crafteo - Kubernetes Training"
 
 [build]
 build-dir = "docs"

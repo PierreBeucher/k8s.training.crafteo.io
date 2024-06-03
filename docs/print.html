@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Crafteo - Docker Training</title>
+        <title>Crafteo - Kubernetes Training</title>
         <meta name="robots" content="noindex">
 
 
@@ -140,7 +140,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">Crafteo - Docker Training</h1>
+                    <h1 class="menu-title">Crafteo - Kubernetes Training</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -723,7 +723,7 @@ kubectl apply -n &lt;YOU&gt; -k resources/kustomize/dev
 <p>Add a Readiness Probe on Vote container (keep the Liveness Probe). Use a similar method as before to test behavior.</p>
 <p>Describe Vote service and verify that no traffic is routed to non-Ready Pod. </p>
 <h2 id="startup-probe"><a class="header" href="#startup-probe">Startup probe</a></h2>
-<p>Add a Readiness Probe on Vote container (keep Liveness and Readiness Probes). Use a similar method as before to test behavior.</p>
+<p>Add a Startup Probe on Vote container (keep Liveness and Readiness Probes). Use a similar method as before to test behavior.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="pod-disruption-budget-pdb"><a class="header" href="#pod-disruption-budget-pdb">Pod Disruption Budget (PDB)</a></h1>
 <p>Pod Disruption Budget (PDB) are used to specify how much Pod can become unavailable during an update. See <a href="https://kubernetes.io/docs/tasks/run-application/configure-pdb/">official doc</a></p>
 <p>Update Vote Deployment to have 5 replicas, a Readiness Probe and prefer Pods to be deployed on a single node, eg:</p>
@@ -817,6 +817,28 @@ kubectl drain ip-192-168-1-160.eu-west-3.compute.internal --delete-emptydir-data
 <p>Inter-pod affinity and anti-affinity allow you to constrain which nodes your Pods can be scheduled on based on the labels of Pods already running on that node, instead of the node labels.</p>
 </blockquote>
 <p>Source: <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity">official doc</a></p>
+<h2 id="spread-pods-on-nodes"><a class="header" href="#spread-pods-on-nodes">Spread Pods on Nodes</a></h2>
+<p>Context: you want to spread Vote Pods on your nodes to even load and improve redundancy and resilience. </p>
+<p>Prefer scheduling Vote Pods on Node which doesn't already have one using an affinity such as:</p>
+<pre><code class="language-yml">      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: &quot;kubernetes.io/hostname&quot;
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - vote
+            namespaceSelector:
+              matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: In
+                values:
+                  - &lt;YOUR NAME&gt;
+</code></pre>
+<h2 id="deploy-pods-together"><a class="header" href="#deploy-pods-together">Deploy Pods together</a></h2>
+<p>Context: for better performance, you want to have Redis Pods as close as possible to Vote Pods by preferring spreading Redis Pods on Nodes and preferring Vote Pods to deploy on a Node already running a Redis Pod (so that cache can be reached on the same Node, reducing network latency). </p>
 <p>Inter-pod anti-affinity:</p>
 <ul>
 <li>Configure Redis Deployment to <strong>prefer</strong> scheduling on Nodes without a Redis Pod already running.</li>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Inter-pod affinity - Crafteo - Docker Training</title>
+        <title>Inter-pod affinity - Crafteo - Kubernetes Training</title>
 
 
         <!-- Custom HTML head -->
@@ -139,7 +139,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">Crafteo - Docker Training</h1>
+                    <h1 class="menu-title">Crafteo - Kubernetes Training</h1>
 
                     <div class="right-buttons">
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
@@ -179,6 +179,28 @@
 <p>Inter-pod affinity and anti-affinity allow you to constrain which nodes your Pods can be scheduled on based on the labels of Pods already running on that node, instead of the node labels.</p>
 </blockquote>
 <p>Source: <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity">official doc</a></p>
+<h2 id="spread-pods-on-nodes"><a class="header" href="#spread-pods-on-nodes">Spread Pods on Nodes</a></h2>
+<p>Context: you want to spread Vote Pods on your nodes to even load and improve redundancy and resilience. </p>
+<p>Prefer scheduling Vote Pods on Node which doesn't already have one using an affinity such as:</p>
+<pre><code class="language-yml">      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - topologyKey: &quot;kubernetes.io/hostname&quot;
+            labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - vote
+            namespaceSelector:
+              matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: In
+                values:
+                  - &lt;YOUR NAME&gt;
+</code></pre>
+<h2 id="deploy-pods-together"><a class="header" href="#deploy-pods-together">Deploy Pods together</a></h2>
+<p>Context: for better performance, you want to have Redis Pods as close as possible to Vote Pods by preferring spreading Redis Pods on Nodes and preferring Vote Pods to deploy on a Node already running a Redis Pod (so that cache can be reached on the same Node, reducing network latency). </p>
 <p>Inter-pod anti-affinity:</p>
 <ul>
 <li>Configure Redis Deployment to <strong>prefer</strong> scheduling on Nodes without a Redis Pod already running.</li>
