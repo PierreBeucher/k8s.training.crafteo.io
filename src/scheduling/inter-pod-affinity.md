@@ -8,7 +8,7 @@ Source: [official doc](https://kubernetes.io/docs/concepts/scheduling-eviction/a
 
 Context: you want to spread Vote Pods on your nodes to even load and improve redundancy and resilience. 
 
-Prefer scheduling Vote Pods on Node which doesn't already have one using an affinity such as:
+Example: Require scheduling Vote Pods on Node which doesn't already have one using an affinity such as:
 
 ```yml
       affinity:
@@ -28,6 +28,10 @@ Prefer scheduling Vote Pods on Node which doesn't already have one using an affi
                 values:
                   - <YOUR NAME>
 ```
+
+Apply this constraint to your Vote Deployment and observe results.
+
+However, if we reach a point where each Node has a Vote Pod, this constraint will prevent new Vote Pods from being scheduled. Update constraint to use `preferredDuringSchedulingIgnoredDuringExecution` to spread Vote Pods across Nodes. (scale your Deployment replicas as needed to test your config)
 
 ## Deploy Pods together
 

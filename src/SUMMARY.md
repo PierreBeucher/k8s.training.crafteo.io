@@ -52,5 +52,6 @@
 # Scheduling
 
 - [Introduction](scheduling/intro.md)
-- [Inter-pod affinity](scheduling/inter-pod-affinity.md)
 - [Topology Spread Constraint](scheduling/topology-spread-constraint.md)
+- [Node Affinity](scheduling/node-affinity.md)
+- [Inter-Pod Affinity](scheduling/inter-pod-affinity.md)
