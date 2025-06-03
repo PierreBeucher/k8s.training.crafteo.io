@@ -2,7 +2,7 @@
 
 [Helm](https://helm.sh/) is a "package manager" for Kubernetes. It uses YAML templates to manage Kubernetes resources and can be shared other package format (Container, NPM, etc.)
 
-You can find Helm charts on [Artifact Hub](https://helm.sh/) or any search engine.
+You can find Helm charts on [Artifact Hub](https://artifacthub.io/) or any search engine.
 
 Usage example:  
 
