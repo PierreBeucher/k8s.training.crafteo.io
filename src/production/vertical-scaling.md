@@ -1,8 +1,8 @@
-# Vertical Scalability and Cluster Autoscaler
+# Scalabilité verticale et Cluster Autoscaler
 
-The Cluster Autoscaler is responsible to continuously observe cluster state and add or remove nodes as needed. It uses resources requests and Pod scheduling capacity to identify when to add or remove nodes.
+Le Cluster Autoscaler observe en continu l'état du cluster et ajoute ou retire des Nodes selon le besoin. Il utilise les requests de ressources et la capacité de scheduling des Pods pour décider d'ajouter ou retirer des Nodes. 
 
-Configure Vote deployment to have resources such as:
+Configurer le deployment Vote pour avoir les ressources suivantes :
 
 ```yaml
         resources:
@@ -14,17 +14,17 @@ Configure Vote deployment to have resources such as:
             memory: 1024Mi
 ```
 
-Then scale Vote deployment to have 20 Pods
+Scaler ensuite le deployment Vote à 20 Pods
 
 ```sh
 kubectl scale deployment vote --replicas 20
 ```
 
-Observe Pod behavior:
-- Pods are scheduled and remain Pending
-- New nodes are added to make more room for new Pods (up to a certain maximum)
+Observer le comportement des Pods :
+- Les Pods sont en Pending
+- De nouveaux nodes sont ajoutés pour accueillir les nouveaux Pods (jusqu'à un certain maximum)
 
-Then scale back your Deployment to 1
-- Observe Nodes are removed
+Revenir à 1 replica
+- Observer la suppression des nodes
 
-Identify the Cluster Autoscaler in `kube-system` responsible for autoscaling. 
+Identifier le Cluster Autoscaler dans `kube-system` responsable de l'autoscaling. 

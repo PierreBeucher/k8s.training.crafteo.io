@@ -1,6 +1,6 @@
 # Pod Resources / Requests
 
-Pods can have [resources requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) such as:
+Les Pods peuvent avoir des [requests et limits de ressources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/), par exemple:
 
 ```yaml
 spec:
@@ -17,12 +17,11 @@ spec:
             memory: 2Gi
 ```
 
-Affect resources to your Pods:
-- Update Vote Pods to request 1 CPU and 1024Mi memory and apply
-- Update Vote Pods to request 0.2 CPU and 128Mi memory and apply
-- What units can you use to specify resources and requests ? What's the difference between `128M` and `128Mi` ?
+Affecter des ressources à vos Pods :
+- Mettre à jour les Pods Vote pour demander 1 CPU et 1024Mi de mémoire
+- Quelles unités peut-on utiliser pour spécifier les ressources ? Quelle différence entre `128M` et `128Mi` ?
 
-Requests and limits affect scheduling differently. Set Vote's Pods resources as below and scale to 10 replicas. Observe result.
+Requests et limits affectent le scheduling différemment. Mettre les ressources des Pods Vote comme ci-dessous et scaler à 10 replicas. Observer le résultat.
 
 ```yml
 resources:
@@ -34,7 +33,7 @@ resources:
     memory: 1Gi
 ```
 
-Now set resources as below and scale to 10 replicas and observe result.
+Mettre ensuite les ressources comme ci-dessous, scaler à 10 replicas et observer le résultat.
 
 ```yml
 resources:

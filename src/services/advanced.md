@@ -1,40 +1,40 @@
-# Advanced Services concepts
+# Concepts avancés sur les Services
 
-## Endpoints and EndpointSlices
+## Endpoints et EndpointSlices
 
-Services uses EndpointSlices (and Endpoints) under the hood to redirect traffic.
+Les Services utilisent des EndpointSlices (et Endpoints) en interne pour rediriger le trafic.
 
-- Scale Vote deployment to 3 replicas
-- Identify EndpointSlices and Endpoints created for Vote service
+- Scaler le déploiement Vote à 3 replicas
+- Identifier les EndpointSlices et Endpoints créés pour le service Vote
 
-Historically, Endpoints were used to link Services to Pods. EndpointSlices provide a more complete API and will eventually replace Endpoints. See [Kubernetes doc for details](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/#motivation)
+Historiquement, les Endpoints étaient utilisés pour lier les Services aux Pods. Aujourd'hui les EndpointSlices fournissent une API plus complète et remplaceront progressivement les Endpoints. Voir [la doc Kubernetes pour plus de détails](https://kubernetes.io/docs/concepts/services-networking/endpoint-slices/#motivation)
 
 ## Headless Services
 
-Headless services can be used when load balancing is not required for Services. Headless services won't have any IP.
+Les Headless Services sont utilisés quand le load balancing n'est pas nécessaire. Les Headless services n'ont pas d'IP.
 
-Using selectors, internal DNS query will directly return all IPs from existing pods.
+En utilisant des selectors, une requête DNS interne retournera directement toutes les IPs des pods existants.
 
-- Scale Vote and Service deployments to 3 replicas
-- Delete Vote service
-- Update Vote service template with `spec.clusterIP: "None"`
-- Re-deploy Vote service
-- Execute a shell in Vote Pod and observe DNS record behavior between `vote` and `result` service
-
+- Scaler les déploiements Vote et Service à 3 replicas
+- Supprimer le service Vote
+- Mettre à jour le template du service Vote avec `spec.clusterIP: "None"`
+- Re-déployer le service Vote
+- Lancer un shell dans le Pod Vote et observer le comportement DNS entre les services `vote` et `result`. 
+  - Lancer un shell dans un container `kubectl exec -it ... sh` et ces commandes pour installer les outils DNS et checker la résolution:
 ```
-# Install DNS utils on the fly for testing
+# Installer des outils DNS à la volée pour tester
 apt update && apt install dns-utils
 
 nslookup vote
 nslookup result
 ```
 
-## Service discovery
+## Exposition des services dans les Pods
 
-Services are exposed to Pods via environment variables. 
+Les services sont exposés aux Pods via des variables d'environnement.
 
-- Execute a shell in Vote pod and explore available services
-  - Use `env` to show all environment variables, and `env | grep` to filter
-- Find Result service environment variables 
+- Lancer un shell dans le pod Vote et explorer les services disponibles
+  - Utiliser `env` pour afficher toutes les variables d'environnement, et `env | grep` pour filtrer
+- Trouver les variables d'environnement du service Result
 
-A more common approach is to use DNS records pointing to Services.
+L'approche la plus courante est d'utiliser les enregistrements DNS pointant vers les Services.

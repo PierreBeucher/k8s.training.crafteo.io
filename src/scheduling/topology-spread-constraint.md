@@ -1,29 +1,29 @@
 # Topology Spread Constraint
 
-[Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) allow you to spread workload across domains using topology. It's useful to **better achieve HA and resilience** by spreading Pods across multiple zones, regions, etc.
+[Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) permettent de répartir la charge sur plusieurs domaines (zones, régions, etc.) topologiques. C'est utile pour **améliorer la haute disponibilité et la résilience** en répartissant les Pods sur plusieurs zones, régions, etc.
 
-`topologySpreadConstraints` uses `topologyKey` to spread Pods around the domains matching given key, for example:
+`topologySpreadConstraints` utilise `topologyKey` pour répartir les Pods sur les domaines correspondant à la clé, par exemple :
 
 ```yaml
     topologySpreadConstraints:
-      # Maximum difference between two domains, 
-      # eg. a domain cannot have more than 1 Pod than another domain
+      # Différence maximale entre deux domaines,
+      # ex. un domaine ne peut pas avoir plus d'1 Pod qu'un autre
       - maxSkew: 1
 
-        # Topology key used to define domain
-        # Pods will be spread across different zones
+        # Clé de topologique utilisée pour définir le domaine
+        # Les Pods seront répartis sur différentes zones
         topologyKey: topology.kubernetes.io/zone
         
-        # Behavior if constraint cannot be respected
+        # Comportement si la contrainte ne peut pas être respectée
         whenUnsatisfiable: DoNotSchedule
 
-        # Only Pods matching these labels will be constrained
+        # Seuls les Pods correspondant à ces labels seront contraints
         labelSelector:
           matchLabels:
             app: vote
 
 ```
 
-Update Vote Deployment to even loads in current region. 
+Mettre à jour le Deployment Vote pour équilibrer la charge dans la région courante.
 
-What's the behavior of `topologySpreadConstraints` in relation to Node/Pod Affinity ? 
+Quel est le comportement de `topologySpreadConstraints` par rapport à Node/Pod Affinity ? 

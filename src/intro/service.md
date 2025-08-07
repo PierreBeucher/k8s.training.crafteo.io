@@ -1,15 +1,15 @@
-# Service: accessing our Pods
+# Service: diriger les flux réseaux vers nos Pods
 
-Manage Services ith manifests and access a Pod via Service
+Manager des Services avec des manifests et accéder à un Pod via un Service:
 
-- Create a Service with `kubectl` using manifest `intro/service.yml`
-  - Reminder: `kubectl apply -f ...`
-- Use `kubectl port-forward` to expose the service locally and test access
-  - Port forwarding will _forward_ a local port yo tour Pod. Use `curl localhost:PORT` or equivalent. 
-  - `kubectl port-forward --help` or checkout official doc
-- How does a Service identify which Pods to serve ?
+- Créer un Service avec `kubectl` en utilisant le manifest `intro/service.yml`
+  - Rappel : `kubectl apply -f ...`
+- Utiliser `kubectl port-forward` pour exposer le service localement et tester l'accès
+  - Le port forwarding va _rediriger_ un port local vers votre Pod. Utilisez `curl localhost:PORT` ou équivalent.
+  - `kubectl port-forward --help` ou consulter la documentation officielle
+- Comment un Service identifie-t-il les Pods à servir ?
 
 ---
 
-- Delete Pods, Deployment and Service with a single `kubectl` command
-- Re-apply our Deployment, Service and Pod with a single command
+- Supprimer Pods, Deployment et Service avec une seule commande `kubectl`
+- Ré-appliquer notre Deployment, Service et Pod avec une seule commande

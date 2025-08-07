@@ -1,18 +1,19 @@
-# Node Affinity and Anti-Affinity
+# Node Affinity et Anti-Affinity
 
-Affinity and Anti-affinity comes in two flavors, as per doc:
+Affinity et Anti-affinity existent en deux variantes:
 
-> `requiredDuringSchedulingIgnoredDuringExecution`: The scheduler can't schedule the Pod unless the rule is met. This functions like `nodeSelector`, but with a more expressive syntax.
-> `preferredDuringSchedulingIgnoredDuringExecution`: The scheduler tries to find a node that meets the rule. If a matching node is not available, the scheduler still schedules the Pod.
+> `requiredDuringSchedulingIgnoredDuringExecution` : le scheduler ne peut pas programmer le Pod si la règle n'est pas respectée. Fonctionne comme `nodeSelector`, mais avec une syntaxe plus expressive.
+> `preferredDuringSchedulingIgnoredDuringExecution` : le scheduler essaie de trouver un node qui respecte la règle. Si aucun node ne correspond, le Pod est quand même programmé.
 
-Source: [official doc](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)
-In short:
-- `requiredDuringSchedulingIgnoredDuringExecution` is a **Hard** constraint: Pod won't be scheduled unless constraint is met
-- `preferredDuringSchedulingIgnoredDuringExecution` is a **Soft** constraint: Pod is prefered to meet criterias, but will be scheduled nonetheless if not met.
+Source : [doc officielle](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)
 
-Both `required` and `preferred` can be set at the same time for complex behavior.
+En résumé :
+- `requiredDuringSchedulingIgnoredDuringExecution` = **contrainte forte** : le Pod ne sera pas programmé si la contrainte n'est pas respectée
+- `preferredDuringSchedulingIgnoredDuringExecution` = **contrainte souple** : le Pod est préféré sur les nodes qui respectent la contrainte, mais sera programmé ailleurs si besoin
 
-For example, this define a Pod affinity requiring a Pod to be scheduled in a specific zone, reproducing a behavior similar to Node Selector
+On peut définir les deux en même temps pour des comportements complexes.
+
+Exemple: Node Affinity qui exige qu'un Pod soit schedulé dans une zone spécifique, comme un Node Selector:
 
 ```yml
 spec:
@@ -29,13 +30,13 @@ spec:
                      - "eu-west-3b"
 ```
 
-Update Vote Deployment to:
-- Require Pods to **PREFER** being scheduled in Zone `eu-west-3b` instead of example above using `required`
-- If your Deployment or Pods are stuck fo some reason, delete Deployment and and re-create it
+Mettre à jour le Deployment Vote pour :
+- Préférer programmer les Pods dans la zone `eu-west-3b` (utiliser `preferred` au lieu de `required`)
+- Si le Deployment ou les Pods sont bloqués, supprimer le Deployment et le recréer
 
-Apply changes and observe Pod scheduling behavior. Destroy all Vote's Pods and observe their scheduling. 
+Appliquer les changements et observer le comportement du scheduling. Supprimer tous les Pods Vote et observer leur scheduling.
 
-Add a second rule so that our Pod:
-- Prefer being scheduled in Zone `eu-west-3b` with a `weight` of `100`
-- Prefer being scheduled in Zone `eu-west-3a` with a `weight` of `50`
-- Observe result
+Ajouter une seconde règle pour que le Pod :
+- Préfère la zone `eu-west-3b` avec un `weight` de `100`
+- Préfère la zone `eu-west-3a` avec un `weight` de `50`
+- Observer le résultat

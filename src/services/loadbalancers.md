@@ -1,10 +1,14 @@
 # LoadBalancer
 
-A LoadBalancer service will provision automatically a Cloud Load Balancer pointing to our Nodes.
+Un service LoadBalancer va automatiquement provisionner un Load Balancer:
+- dans le Provider Cloud correspondant à notre cluster si il est déployé dans le Cloud
+- Directement via des configurations internes pour un cluster on-prem
 
-- Update Vote service to make it of type `LoadBalancer`
-  - You can remove `nodePort: xxx` from Service definition
-- Observe change in service behavior
-  - Use `kubectl describe|get -o yaml` to observe new status
-- Change back type to `ClusterIP` and observe Cloud Load Balancer deletion
-  - Make sure to do that because Load Balancers cost $$$, thanks :)
+Configurer un Service de type Load Balancer:
+
+- Modifier le service Vote pour qu'il soit de type `LoadBalancer`
+  - Optionnel: retirer `nodePort: xxx` de la définition du Service qui n'est plus nécéssaire
+- Observer le changement de comportement du service
+  - Utiliser `kubectl describe|get -o yaml` pour observer le nouveau status
+- Repasser le type à `ClusterIP` et observer la suppression du Cloud Load Balancer
+  **- Bien faire cette étape car les Load Balancers coûtent $$$, merci :-)**

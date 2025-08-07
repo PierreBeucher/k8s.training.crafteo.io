@@ -1,19 +1,21 @@
-# Inter-pod Affinity and Anti-affinity 
+# Pod Affinity et Anti-affinity
 
-> Inter-pod affinity and anti-affinity allow you to constrain which nodes your Pods can be scheduled on based on the labels of Pods already running on that node, instead of the node labels.
+> Pod affinity et Anti-affinity permettent de contraindre sur quels nodes vos Pods peuvent être schedulés en fonction des labels des Pods déjà présents sur ce node, au lieu des labels du node. Bien que complexe à utiliser, ils permettent des schémas de scheduling avancés. 
 
-Source: [official doc](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity)
+Source : [doc officielle](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity)
 
-## Spread Pods on Nodes
+## Répartir les Pods sur les Nodes
 
-Context: you want to spread Vote Pods on your nodes to even load and improve redundancy and resilience. 
+Contexte: on souhaite répartir les Pods Vote sur les nodes pour équilibrer la charge et améliorer la redondance et la résilience.
 
-Example: Require scheduling Vote Pods on Node which doesn't already have one using an affinity such as:
+Exemple: scheduler les Pods Vote sur un Node qui n'a pas déjà un Pod Vote via une Pod Anti-affinity:
 
 ```yml
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
+          # Groupe les Nodes par Hostname (donc 1 noeud par groupe)
+          # Selectionne un groupe (donc un Node) qui n'a pas de Pod matchant le label "app=vote"
           - topologyKey: "kubernetes.io/hostname"
             labelSelector:
               matchExpressions:
@@ -29,18 +31,18 @@ Example: Require scheduling Vote Pods on Node which doesn't already have one usi
                   - <YOUR NAME>
 ```
 
-Apply this constraint to your Vote Deployment and observe results.
+Appliquer au Deployment Vote et observer le résultat.
 
-However, if we reach a point where each Node has a Vote Pod, this constraint will prevent new Vote Pods from being scheduled. Update constraint to use `preferredDuringSchedulingIgnoredDuringExecution` to spread Vote Pods across Nodes. (scale your Deployment replicas as needed to test your config)
+Cependant, si chaque Node a déjà un Pod Vote, cette contrainte empêchera de programmer de nouveaux Pods Vote. Modifier la contrainte pour utiliser `preferredDuringSchedulingIgnoredDuringExecution` afin de répartir les Pods Vote sur les Nodes sans bloquer: `preferred` vs.  `required`
 
-## Deploy Pods together
+## Déployer des Pods sur un même Node
 
-Context: for better performance, you want to have Redis Pods as close as possible to Vote Pods by preferring spreading Redis Pods on Nodes and preferring Vote Pods to deploy on a Node already running a Redis Pod (so that cache can be reached on the same Node, reducing network latency). 
+Contexte: pour de meilleures performances, on veut que les Pods Redis soient au plus proche des Pods Vote, en préférant répartir les Pods Redis sur les Nodes et en préférant que ces Pods Vote soient déployés sur un Node qui a déjà un Pod Redis (pour réduire la latence réseau en contactant Redis).
 
-Inter-pod anti-affinity:
-- Configure Redis Deployment to **prefer** scheduling on Nodes without a Redis Pod already running.
+Pod anti-affinity :
+- Configurer le Deployment Redis pour **préférer** être programmé sur un Node sans Pod Redis déjà présent.
 
-Inter-pod affinity:
-- Configure Vote Deployment to **require** scheduling on a Node which already have a Redis Pod (for communication optimization) and **prefer** a Node which doesn't already have a Vote Pod. 
+Pod affinity :
+- Configurer le Deployment Vote pour **exiger** d'être programmé sur un Node qui a déjà un Pod Redis (pour optimiser la communication) et **préférer** un Node qui n'a pas déjà un Pod Vote.
 
-Play with replicas on Redis and Vote deployment to observe results.
+Jouer avec les replicas sur les Deployments Redis et Vote pour observer les résultats.

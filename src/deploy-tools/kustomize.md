@@ -1,53 +1,53 @@
 # Kustomize
 
-Kustomize is a built-in `kubectl` tool for multi-environment and configuration management features. 
+Kustomize est un outil intégré à `kubectl` pour du déploiement multi-environnements et la gestion de configuration.
 
-See [Kustomize Official documentation](https://kubectl.docs.kubernetes.io) and [reference documentation](https://kubectl.docs.kubernetes.io/references/kustomize/)
+Voir la [documentation officielle de Kustomize](https://kubectl.docs.kubernetes.io) et la [documentation de référence](https://kubectl.docs.kubernetes.io/references/kustomize/)
 
 ## Kustomize Example Voting App
 
-Kustomized applications need:
+Un déploiement d'application avec Kustomize nécessite:
 
-- A _base_ with our YAML config (Deployment, Services, etc.) and a `kustomization.yml` listing desired resources along with some options.
-- One or more overrides (typically per environment, but not necessarily)
+- Une _base_ avec la config YAML (Deployment, Services, etc.) et un `kustomization.yml` listant les ressources et options souhaitées
+- Un ou plusieurs overrides (typiquement par environnement, mais pas forcément)
 
-To Kustomize Example Voting App:
+Pour Kustomizer Example Voting App :
 
-- Copy `resources/kustomize/base-kustomization.yml` into `base/kustomization.yml`. This file references all Example Voting App resources.
-- Use one of `resources/kustomize/dev` or `resources/kustomize/prod` with `kubectl`. Note that they each reference their base using a relative path, eg. `resources: [ "../../../base" ]`
-  
+- Copier `resources/kustomize/base-kustomization.yml` dans `base/kustomization.yml`. Ce fichier référence toutes les ressources de l'Example Voting App.
+- Utiliser l'un des dossiers `resources/kustomize/dev` ou `resources/kustomize/prod` avec `kubectl`. Chacun référence sa base via un chemin relatif, ex : `resources: [ "../../../base" ]`
+
 ```sh
 #
-# Mind the -k
+# Attention au -k
 #
-# Like kubectl apply -f but will read from dev and all referenced resources (including base)
+# Comme kubectl apply -f mais va lire depuis dev et toutes les ressources référencées (y compris la base)
 kubectl apply -n <YOU> -k resources/kustomize/dev
 ```
 
-Observe result based on dev and base `kustomization.yml` files content, especially `commonLabels`
+Observer le résultat selon le contenu des fichiers `kustomization.yml` de dev et base, en particulier `commonLabels`
 
-## Set namespace
+## Définir le namespace
 
-Create a namespace using your name prefixed with `-kustomize`, eg. `YOU-kustomize`.
+Créer un namespace avec votre nom préfixé par `-kustomize`, ex : `YOU-kustomize`.
 
-Update dev's `kustomization.yml` to set namespace `YOU-kustomize` and apply without `-n xxx` flag, eg:
+Mettre à jour le `kustomization.yml` de dev pour définir le namespace `YOU-kustomize` et appliquer sans flag `-n xxx`, ex :
 
 ```sh
 kubectl apply -k resources/kustomize/dev
 ```
 
-What happened to resources in previous namespace ?
+Que sont devenues les ressources dans l'ancien namespace ?
 
-## Patches and ConfigMap/Secret generators
+## Patches et générateurs ConfigMap/Secret
 
-Use a [ConfigMap generator](https://kubectl.docs.kubernetes.io/guides/config_management/secrets_configmaps/) to create a ConfigMap from file `postgresql.conf` file
+Utiliser un [ConfigMap generator](https://kubectl.docs.kubernetes.io/guides/config_management/secrets_configmaps/) pour créer une ConfigMap à partir du fichier `postgresql.conf`
 
-Use a [Secret generator](https://kubectl.docs.kubernetes.io/guides/config_management/secrets_configmaps/) to create a Secret from file `postgres-secret.properties` file
-- You'll need additional options to consider this file as environment variables
+Utiliser un [Secret generator](https://kubectl.docs.kubernetes.io/guides/config_management/secrets_configmaps/) pour créer un Secret à partir du fichier `postgres-secret.properties`
+- Il faut des options supplémentaires pour considérer ce fichier comme des variables d'environnement
 
-Override Deployment using a _patch_ to ensure Secret and ConfigMap values are used instead of values set in base.
-- Use `db-deployment-patch.yml` and update `kustomization.yml`
+Surcharger le Deployment avec un _patch_ pour s'assurer que les valeurs du Secret et de la ConfigMap sont utilisées à la place de celles définies dans la base.
+- Utiliser `db-deployment-patch.yml` et mettre à jour `kustomization.yml`
 
-## Adapt another Kustomization
+## Adapter une autre Kustomization
 
-Reproduce changes from `dev` Kustomization to `prod` Kustomization and deploy them both in the same namespace. 
+Reproduire les changements de la Kustomization `dev` dans la Kustomization `prod` et déployer les deux dans le même namespace. 

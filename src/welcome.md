@@ -1,5 +1,5 @@
-# Crafteo - Kubernetes Training
+# Crafteo - Formation Kubernetes
 
-Welcome on Kubernetes training exercise book ! Follow link from menu to access modules.
+Bienvenue sur la page d'exercice Kubernetes ! Utiliser le menu pour accéder aux différents modules.
 
-More info on [crafteo.io](https://crafteo.io)
+Plus d'infos sur [crafteo.io](https://crafteo.io)

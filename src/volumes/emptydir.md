@@ -1,13 +1,16 @@
 # emptyDir volume
 
-`emptyDir` can be used in various situation, such as sharing data between container of the same Pod. For example to create a backup of database with a `postgres` container and upload result to AWS S3 with `aws-cli` container:
+`emptyDir` peut être utilisé dans différentes situations, comme partager des données entre les containers d'un même Pod. Par exemple pour créer une sauvegarde d'une base de données:
+- Configurer un Pod avec 2 containers,  `postgres` (dump database) et `aws` (upload de données)
+- Partager un volume `/backup` entre les 2 containers d'un même Pod pour "passer" le dump de `postgres` à `aws`
 
-A backup CronJob is present at `resources/volumes/cronjob.yml` but lacks Volume configs. Adapt template to:
+Un CronJob de backup est présent dans `resources/volumes/cronjob.yml` mais il manque la configuration des Volumes. Adapter le template pour :
 
-- Declare an `emptyDir` volume (use `volumes:` in appropriate place)
-- Mount the volume at `/backup` for both containers 
-- Create the CronJob and trigger it (create a Job from the CronJob) with
+- Déclarer un volume `emptyDir` (utiliser `volumes:` au bon endroit)
+  - Le volume doit être déclaré au niveau du Pod puis un point de montage effectué au niveau de chaque container
+- Monter le volume sur le path `/backup` pour les deux containers
+- Créer le CronJob et le déclencher (créer un Job à partir du CronJob) avec
   ```sh
   kubectl create job --from=cronjob/postgres-backup manual-backup
   ```
-- Observe the result 
+- Observer le résultat 

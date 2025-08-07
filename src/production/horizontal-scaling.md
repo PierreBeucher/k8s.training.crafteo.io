@@ -1,8 +1,8 @@
-# Horizontal Scalability and Horizontal Pod Autoscaler (HPA)
+# Scalabilité horizontale et Horizontal Pod Autoscaler (HPA)
 
-Let's configure an Horizontal Pod Autoscaler (HPA) to automatically scale our Vote Pods when their CPU load is high. We'll use a Auto Voter Pod to emulate a CPU charge (lots of vote !)
+Configurer un Horizontal Pod Autoscaler (HPA) pour scaler automatiquement les Pods Vote lorsque leur charge CPU est élevée. On utilisera un Pod Auto Voter pour simuler une charge CPU (beaucoup de votes !)
 
-Update Vote deployment to specify resources and requests such as:
+Mettre à jour le Deployment Vote pour spécifier les ressources et requests:
 
 ```yaml
         resources:
@@ -14,15 +14,15 @@ Update Vote deployment to specify resources and requests such as:
             memory: 256Mi
 ```
 
-Deploy Auto Voter: `kubectl apply -f resources/scaling/auto-voter.yml`
-- It's a simple bash loop sending POST request to Vote service.
-- Observe Vote CPU load with `kubectl top` command (CPU load is ~2m idle, and should now be around ~50m). For example:
+Déployer Auto Voter : `kubectl apply -f resources/scaling/auto-voter.yml`
+- C'est une simple boucle bash qui envoie des requêtes POST au service Vote.
+- Observer la charge CPU de Vote avec la commande `kubectl top` (CPU idle ~2m, devrait passer à ~50m). Exemple :
 ```sh
 watch kubectl top pod vote-xxx
 ```
 
-Deploy HPA in `resources/scaling/hpa.yml` and observe scalability
-- How does HPA know when a pod should be scaled-up?
+Déployer le HPA dans `resources/scaling/hpa.yml` et observer la scalabilité
+- Comment le HPA sait-il quand scaler un pod ?
 
-Delete Auto Voter and observe HPA scale down. 
+Supprimer Auto Voter et observer le HPA réduire le nombre de pods. 
   

@@ -1,9 +1,9 @@
-# Ingress with TLS (HTTPS)
+# Ingress avec TLS (HTTPS)
 
-`resources/https` contains an Ingress resource configured with TLS (HTTPS) and a [Cert Manager](https://github.com/cert-manager/cert-manager) Certificate.
+`resources/https` contient une ressource Ingress configurée avec TLS (HTTPS) et un Certificate [Cert Manager](https://github.com/cert-manager/cert-manager).
 
-Deploy this Ingress and Certificate along with Example Voting App
-- Make sure Example Voting App is deployed
-- Deploy resources in `resources/https`. **You must replace `<YOUR_NAME>` in YAML files by your own name. **
-- Observe creation of Ingress and Certificate resources
-- Test functionnality. The Ingress should be reachable externally. 
+Déployer cet Ingress et le Certificate avec Example Voting App
+- Vérifier que Example Voting App est déployée
+- Déployer les ressources dans `resources/https`. **Remplacer `<YOUR_NAME>` dans les YAML par votre nom.**
+- Observer la création des ressources Ingress et Certificate
+- Tester la fonctionnalité. L'Ingress doit être accessible de l'extérieur. 

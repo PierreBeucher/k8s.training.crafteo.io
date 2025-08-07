@@ -1,17 +1,18 @@
-# Jobs and CronJobs
+# Jobs et CronJobs
 
-Use a CronJob to vote every minute (yeah, that's cheating)
+Utiliser un CronJob pour voter chaque minute (oui, c'est de la triche)
 
-## Deploy CronJob
+## Déployer un CronJob
 
-- Deploy CronJob `resources/cronjob.yml`
-- Analyze CronJob template content. Why is `spec` specified multiple times?
-- What's the CronJob schedule ?
+- Déployer le CronJob `resources/cronjob.yml`
+- Analyser le contenu du template CronJob. Pourquoi `spec` est-il spécifié plusieurs fois ?
+- Quand sera executé le CronJob ?
 
-## Parallelism
+## Parallélisme
 
-Update your CronJob to run 3 instances of Jobs every minute instead of 1. 
+Mettre à jour le CronJob pour lancer 3 instances de Jobs au lieu d'une seule lors du trigger du CronJob.
 
-## Trigger Job manually on-demand
+## Déclencher un Job manuellement à la demande
 
-Run a `kubectl` command to trigger manually Job from CronJob without waiting for schedule time.
+Lancer une commande `kubectl` pour déclencher manuellement un Job à partir du CronJob sans attendre la prochaine exécution planifiée.
+- Utiliser `kubectl create [...]`

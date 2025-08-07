@@ -1,8 +1,8 @@
 # Pod Disruption Budget (PDB)
 
-Pod Disruption Budget (PDB) are used to specify how much Pod can become unavailable during an update. See [official doc](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
+Les Pod Disruption Budget (PDB) servent à spécifier un nombre de Pods pouvant devenir indisponibles lors d'une mise à jour. Si le PDB ne peut pas être respecté, la mise à jour d'un Deployment ou autre object échouera ou restera bloqué. C'est un méchanisme de sécurité pour empêcher les downtimes involontaires. Voir [la doc officielle](https://kubernetes.io/docs/tasks/run-application/configure-pdb/)
 
-Update Vote Deployment to have 5 replicas, a Readiness Probe and prefer Pods to be deployed on a single node, eg:
+Mettre à jour le Deployment Vote pour avoir 5 replicas, une Readiness Probe et préférer déployer les Pods sur un seul node, ex :
 
 ```yml
 apiVersion: apps/v1
@@ -32,7 +32,7 @@ spec:
           initialDelaySeconds: 5
 ```
 
-Create a PDB for Vote to allow max 1 Pod unavailable such as:
+Créer un PDB pour Vote pour permettre max 1 Pod indisponible, par exemple :
 
 ```yml
 apiVersion: policy/v1
@@ -46,14 +46,14 @@ spec:
       app: vote
 ```
 
-Then drain the Node on which you deployed your Pods to observe behavior.
+Drainer ensuite le Node sur lequel les Pods sont déployés pour observer le comportement.
 
 ```sh
-# Example command to drain a node
-# Replaced with your node name
+# Exemple de commande pour drainer un node
+# Remplacer par le nom de votre node
 kubectl drain ip-192-168-1-160.eu-west-3.compute.internal --delete-emptydir-data=true --ignore-daemonsets=true
 ```
 
-Reproduce with `maxUnavailable: 2` instead of `minAvailable: 1`
+Reproduire avec `maxUnavailable: 2` au lieu de `minAvailable: 1`
 
-What happens when you set desired value as percentage and Pod number is not round? (eg. minAvailable of 50% out of 5 replicas)
+Que se passe-t-il si on met une valeur en pourcentage et que le nombre de Pods n'est pas rond ? (ex : minAvailable à 50% sur 5 replicas)

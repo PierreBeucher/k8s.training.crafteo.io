@@ -1,21 +1,22 @@
 # NodePort
 
-Example Voting App has a few services to access each component.
+L'application Example Voting App propose plusieurs services pour accéder à chaque composant.
 
-- Update `vote` and `result` service to use `NodePort` service type such as:
+- Modifier les services `vote` et `result` pour utiliser le type de service `NodePort`:
   ```yaml
   spec:
     type: NodePort
     ports:
     - name: "result-service"
-        port: 5001
-        targetPort: 80
-        # Mind port conflict !
-        # Since we're all on the same cluster, 
-        # everyone needs to use different ports. 
-        # Use a port between 31000 and 36000
-        nodePort: 31001
+      port: 5001
+      targetPort: 80
+      # Attention aux conflits de ports !
+      # Comme tout le monde est sur le même cluster,
+      # chacun doit utiliser des ports différents.
+      # Utiliser un port entre 31000 et 36000
+      nodePort: 31001
   ```
-- Access Vote and Result via a web browser using a Node's public IP address or hostname.
-  - Even if Node port is open and listening, we also need a network and firewall rules to accept incoming traffic 
-- What are `port`, `targetPort` and `nodePort` referring to?
+- Accéder à Vote et Result via un navigateur web en utilisant l'adresse IP publique ou le nom d'hôte d'un Node.
+  - Utiliser `kubectl get node` et `kubectl describe node <node-name>` pour identifier l'IP publique des Nodes
+  - Même si le port Node est ouvert et à l'écoute, il faut aussi des règles réseau et firewall pour accepter le trafic entrant
+- À quoi correspondent `port`, `targetPort` et `nodePort` ?

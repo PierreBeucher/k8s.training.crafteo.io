@@ -1,13 +1,13 @@
 # StatefulSets
 
-Deploy a Postgres database as StatefulSet by running command:
+Déployer une base de données Postgres en StatefulSet avec la commande :
 
 ```
 helm install my-postgres oci://registry-1.docker.io/bitnamicharts/postgresql -f resources/postgres-sts-values.yml
 ```
 
-This command created a a few StatefulSets. _Note: Helm is a package manager for Kubernetes, an equivalent of `apt` or `yum` for Linux. We'll come back to Helm later._
+Cette commande crée plusieurs StatefulSets. _Note : Helm est un package manager pour Kubernetes, l'équivalent de `apt` ou `yum` pour Linux. On reviendra sur Helm plus tard._
 
-- Use `kubectl` to describe Pods and PersistentVolumes. Observe the naming of pods.
-- Try to delete a Pod and observe result.
-- Delete Postgres Helm chart release with `helm delete my-postgres`. What happened to volumes?
+- Utiliser `kubectl` pour décrire les Pods et PersistentVolumes. Observer le nommage des pods.
+- Supprimer un Pod et observer le résultat.
+- Supprimer le release Helm Postgres avec `helm delete my-postgres`. Que se passe-t-il pour les volumes ?

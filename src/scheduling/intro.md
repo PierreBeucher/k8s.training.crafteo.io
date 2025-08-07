@@ -1,10 +1,10 @@
-# Pod scheduling: introduction
+# Contraintes de Scheduling: introduction
 
-Pod scheduling allow to specify Nodes constraints on which Pod will be scheduled. See [official documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
+Les contraintes de scheduling des Pods permettent de spécifier comment un Pod sera scheduler sur un Node. Voir [la documentation officielle](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity)
 
-## Node selector: affect Pods using Node labels
+## Node selector: affecter des Pods via les labels Node
 
-Kubernetes Nodes have labels like other Kubernetes objects. You can get Node labels by `get`ing or `describe`ing a Node.
+Les Nodes Kubernetes ont des labels comme les autres objets Kubernetes. On peut obtenir les labels d'un Node avec `get` ou `describe`.
 
 ```sh
 kubectl get node some-node-name -o yaml
@@ -15,8 +15,8 @@ kind: Node
 metadata:
   name: some-node-name
 
-  # These labels can be used by Pods to select Nodes
-  # Much like Services use labelSelector to select Pods
+  # Ces labels peuvent être utilisés par les Pods pour sélectionner les Nodes
+  # Comme les Services utilisent labelSelector pour sélectionner les Pods
   labels:
     beta.kubernetes.io/arch: amd64
     beta.kubernetes.io/os: linux
@@ -27,10 +27,10 @@ metadata:
 # ...
 ```
 
-Use `nodeSelector` to assign Vote Deployment's Pods to a given Node using the `topology.kubernetes.io/zone` label.
-- Use `kubectl describe node` or `kubectl get node -o yaml` to identify suitable Node labels
-- Update Vote Deployment to define `nodeSelector` and apply
+Utiliser `nodeSelector` pour affecter les Pods du Deployment Vote à un Node donné via le label `topology.kubernetes.io/zone`.
+- Utiliser `kubectl describe node` ou `kubectl get node -o yaml` pour identifier les labels des Nodes
+- Mettre à jour le Deployment Vote pour définir `nodeSelector` et appliquer
 
-## Affect Pods to specific Nodes
+## Affecter un Pod à un Node spécifique
 
-Use a Pod's `nodeName` to assign a Pod to a specific Node.
+Utiliser le champ `nodeName` d'un Pod pour l'affecter à un Node précis.

@@ -1,14 +1,14 @@
-# Logs, exec and other basic operations
+# `logs`, `exec` et autres opérations
 
-Lots of `kubectl` commands are direct equivalent of their `docker` / `podman` counterpart.
+De nombreuses commandes `kubectl` sont l'équivalent direct de la CLI `docker` / `podman` sur Kubernetes.
 
-- Show logs for one of your running Pod
-  - Equivalent of `docker logs`
-  - You can also target a Deployment or Service
-- Run a `sh` session in a Pod's container
-  - Equivalent of `docker exec -it [container] sh`
-  - From within Pod, try to reach a Pod via it's Service DNS record (eg. `curl <service>.<namespace>.svc.cluster.local`) specyfing the proper port.
-- Get Deployment as YAML
-  - Use an option of `kubectl get`
-- Describe a Deployment
-  - Equivalent of `docker inspect`
+- Afficher les logs d'un de vos Pods en cours d'exécution
+  - Équivalent de `docker logs`
+  - Vous pouvez aussi cibler un Deployment ou un Service
+- Lancer un shell `sh` dans le conteneur d'un Pod
+  - Équivalent de `docker exec -it [container] sh`
+  - Depuis votre nouveau shell, essayez d'atteindre un autre Pod via son le nom de domaine associé à son Service (ex : `curl <service>.<namespace>.svc.cluster.local`) en spécifiant le port approprié.
+- Afficher un Deployment (ou autre object) au format YAML
+  - Utilisez une option de `kubectl get`
+- Décrire un Deployment
+  - Équivalent de `docker inspect`

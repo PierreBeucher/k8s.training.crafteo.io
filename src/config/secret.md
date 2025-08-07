@@ -1,32 +1,32 @@
 # Secret
 
-Secrets are much like ConfigMaps, except they are (theoretically) encrypted in Control Plane. Their access / usage should be protected with proper authorization in cluster.
+Les Secrets sont similaires aux ConfigMaps, sauf qu'ils sont (théoriquement) chiffrés dans le Control Plane. Leur accès et utilisation doivent être protégés avec une autorisation appropriée dans le cluster.
 
-Secrets require their config to be Base64 encoded. Use a command to encode a string in Base64:
+Les Secrets nécessitent que leur configuration soit encodée en Base64. Utiliser une commande pour encoder une chaîne en Base64 :
 
 ```
 echo -n "mypassword" | base64
 ```
 
-_Note: Base64 is NOT encryption. It should not be used to protect a secret. Base64 is used as secrets can contain binary data and their base64 representation can be used as plain strings._
+_Note : Base64 n'est PAS un chiffrement. Il ne doit pas être utilisé pour protéger un secret. Base64 est utilisé car les secrets peuvent contenir des données binaires et leur représentation base64 peut être utilisée comme chaîne de caractères._
 
-# Use plain string in secrets?
+# Utiliser une chaîne en clair dans un Secret ?
 
-By default secret values must be base64 encoded, eg:
+Par défaut, les valeurs des secrets doivent être encodées en base64, ex :
 
 ```yaml
 data:
-    # "secretPassword" in base 64
+    # "secretPassword" en base 64
     password: c2VjcmV0UGFzc3dvcmQ=
 ```
 
-Find a way to use plain strings instead of base64 data in your Secret YAML manifest.
+Trouver un moyen d'utiliser des chaînes en clair au lieu de données encodées en base64 dans un manifest YAML Secret.
 
-# Environment variables from Secrets
+# Variables d'environnement depuis un Secret
 
-Use Secret `resources/config/secret-postgres-env.yml` to set environment variables in Postgres Deployment
+Utiliser le Secret `resources/config/secret-postgres-env.yml` pour définir des variables d'environnement dans le Deployment Postgres
 
-# Files from Secrets
+# Fichiers depuis un Secret
 
-Copy ConfigMap `resources/config/configmap-postgres-config.yml` and transform it into a Secret to mount a custom Postgres configuration in container at `/etc/postgresql/postgresql.conf`
+Copier la ConfigMap `resources/config/configmap-postgres-config.yml` et la transformer en Secret pour monter une configuration Postgres personnalisée dans le container à `/etc/postgresql/postgresql.conf`
 

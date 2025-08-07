@@ -1,38 +1,38 @@
-# Helm: package manager for Kubernetes
+# Helm : package manager pour Kubernetes
 
-[Helm](https://helm.sh/) is a "package manager" for Kubernetes. It uses YAML templates to manage Kubernetes resources and can be shared other package format (Container, NPM, etc.)
+[Helm](https://helm.sh/) est un "package manager" pour Kubernetes. Il utilise des templates YAML pour gérer les ressources Kubernetes et permet de partager des "Charts" publiques ou privées. 
 
-You can find Helm charts on [Artifact Hub](https://artifacthub.io/) or any search engine.
+On trouve des charts Helm sur [Artifact Hub](https://artifacthub.io/) ou via n'importe quel moteur de recherche.
 
-Usage example:  
+Exemple d'utilisation :
 
 ```sh
 helm --help
 
-# Before installing a chart, adding a Repository is often required
-# Adding "bitnami" repository
+# Avant d'installer un chart, il faut souvent ajouter un Repository
+# Ajouter le repository "bitnami"
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
-# You can also search for a Helm chart
-# Search for "redis" charts
+# On peut aussi chercher un chart Helm
+# Chercher les charts "redis"
 helm search repo redis
 
-# Install a Redis chart
-# 'myredis' is the Release name (like a container name for an image)
-# 'bitnami/redis' is the chart to install
+# Installer un chart Redis
+# 'myredis' est le nom du Release (comme un nom de container pour une image)
+# 'bitnami/redis' est le chart à installer
 helm install myredis bitnami/redis
 ```
 
-Adding a repository is not always required, a recent update allow to specify directly an OCI registry such as:
+Ajouter un repository n'est pas toujours nécessaire, de nombreuses charts sont aujourd'hui installables via OCI comme:
 
 ```sh
 helm install my-redis oci://registry-1.docker.io/bitnamicharts/redis
 ```
 
-## Install a Wordpress chart
+## Installer un chart Wordpress
 
-Find a Wordpress chart and install it. Try to reach it externally using a port-forward.
-- Wordpress is a blogging system with a database. It provides a simple frontend we'll try to reach from the internet.  
-- Look for a Wordpress chart using any method
+Trouver un chart Wordpress et l'installer. Essayer d'y accéder en externe avec un port-forward.
+- Wordpress est un système de blog avec une base de données. Il fournit un frontend simple à atteindre depuis internet.
+- Chercher un chart Wordpress par n'importe quelle méthode
 
-Once done, uninstall Wordpress your Wordpress chart's release
+Une fois terminé, désinstaller le release du chart Wordpress

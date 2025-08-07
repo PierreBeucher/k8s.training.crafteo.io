@@ -1,22 +1,22 @@
-# Helm advanced: writing a Helm charts
+# Helm avancé: écrire un chart Helm
 
-Directory `resources/helm/example-voting-app` contains a Helm chart with templated YAML manifests.
+Le dossier `resources/helm/example-voting-app` contient un chart Helm avec des manifests YAML templatisés.
 
-## Deployment, update and values
+## Déploiement, mise à jour et values
 
-Use `helm install` command to deploy a release of the Example Voting App chart.
-- Verify it works via port-forward
-- Explore YAML templates to understand templating mechanisms and its connection to `values.yml`
+Utiliser la commande `helm install` pour déployer un release du chart Example Voting App.
+- Vérifier le fonctionnement via un port-forward
+- Explorer les templates YAML pour comprendre le mécanisme de templating et le lien avec `values.yml`
 
-You can override `values.yml` with external configuration files, typically by environment.
-- Update your release to override the default values using `resources/helm/values/dev.yml`
+Il est possible d'override `values.yml` avec des fichiers de configuration externes, typiquement par environnement.
+- Mettre à jour le release pour surcharger les valeurs par défaut avec `resources/helm/values/dev.yml`
 
-## Secrets Management
+## Gestion des Secrets
 
-Helm doesn't provide a native mechanism for managing secrets. A common pattern is to reference an external secret (not managed by the chart).
+Helm ne fournit pas de mécanisme natif pour gérer les secrets. Un pattern courant est de référencer un secret externe (non géré par le chart).
 
-Update your Helm release using `resources/helm/values/prod.yml` values.
-- This configuration references an external secret, **you must create it on your own**
-- Explore the contents of the chart to understand the underlying mechanism
+Mettre à jour le release Helm en utilisant les valeurs de `resources/helm/values/prod.yml`.
+- Cette configuration référence un secret externe, **il faut le créer soi-même**
+- Explorer le contenu du chart pour comprendre le mécanisme sous-jacent
 
-There are also [Helm plugins](https://helm.sh/docs/topics/plugins/) that allow secret management such as [`helm-secrets`](https://github.com/jkroepke/helm-secrets)
+Il existe aussi des [plugins Helm](https://helm.sh/docs/topics/plugins/) permettant la gestion des secrets comme [`helm-secrets`](https://github.com/jkroepke/helm-secrets)

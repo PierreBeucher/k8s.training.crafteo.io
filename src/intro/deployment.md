@@ -1,11 +1,11 @@
-# Deployment: manage multiple Pods
+# Deployment : gérer plusieurs Pods
 
-Deployment manages multiple Pods.
+Un Deployment gère un ensemble de Pods.
 
-- Create a Deployment with `kubectl` from manifest `intro/deployment.yml`. 
-  - Use `kubectl --help`, a search engine or IA if needed
-  - Command looks like `kubectl apply ...`
-- List existing Deployments with `kubectl get`
-- Restart the Pod created by our Deployment
-  - There's no `restart` command, find another way
-- Update your Deployment to have 3 replicas of our Pod
+- Créer un Deployment avec `kubectl` à partir du manifest `intro/deployment.yml`.
+  - Utiliser `kubectl --help`, un moteur de recherche ou une IA si besoin
+  - La commande ressemble à `kubectl apply [...]`
+- Lister les Deployments avec `kubectl get`
+- Redémarrer le Pod créé par notre Deployment
+  - Il n'y a pas de commande `restart`, trouver une autre méthode
+- Mettre à jour votre Deployment pour avoir 3 replicas de notre Pod
