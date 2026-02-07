@@ -55,3 +55,10 @@
 - [Topology Spread Constraint](scheduling/topology-spread-constraint.md)
 - [Node Affinity](scheduling/node-affinity.md)
 - [Pod Affinity](scheduling/inter-pod-affinity.md)
+
+# Rancher
+
+- [Apps and Helm Charts](rancher/apps.md)
+- [CLI](rancher/cli.md)
+- [GitOps](rancher/gitops.md)
+- [Backup](rancher/backup.md)
