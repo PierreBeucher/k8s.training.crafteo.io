@@ -13,7 +13,7 @@ L'application Example Voting App propose plusieurs services pour accéder à cha
       # Attention aux conflits de ports !
       # Comme tout le monde est sur le même cluster,
       # chacun doit utiliser des ports différents.
-      # Utiliser un port entre 31000 et 36000
+      # Utiliser un port entre 31000 et 32500
       nodePort: 31001
   ```
 - Accéder à Vote et Result via un navigateur web en utilisant l'adresse IP publique ou le nom d'hôte d'un Node.

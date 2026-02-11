@@ -9,6 +9,6 @@ Configurer un Service de type Load Balancer:
 - Modifier le service Vote pour qu'il soit de type `LoadBalancer`
   - Optionnel: retirer `nodePort: xxx` de la définition du Service qui n'est plus nécéssaire
 - Observer le changement de comportement du service
-  - Utiliser `kubectl describe|get -o yaml` pour observer le nouveau status
+  - Utiliser `kubect get svc` ou `kubectl describe ...`pour observer le nouveau status
 - Repasser le type à `ClusterIP` et observer la suppression du Cloud Load Balancer
   **- Bien faire cette étape car les Load Balancers coûtent $$$, merci :-)**
