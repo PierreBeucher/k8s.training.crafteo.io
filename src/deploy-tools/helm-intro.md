@@ -9,18 +9,10 @@ Exemple d'utilisation :
 ```sh
 helm --help
 
-# Avant d'installer un chart, il faut souvent ajouter un Repository
-# Ajouter le repository "bitnami"
-helm repo add bitnami https://charts.bitnami.com/bitnami
-
-# On peut aussi chercher un chart Helm
-# Chercher les charts "redis"
-helm search repo redis
-
 # Installer un chart Redis
 # 'myredis' est le nom du Release (comme un nom de container pour une image)
 # 'bitnami/redis' est le chart à installer
-helm install myredis bitnami/redis
+helm install my-redis oci://registry-1.docker.io/bitnamicharts/redis
 ```
 
 Ajouter un repository n'est pas toujours nécessaire, de nombreuses charts sont aujourd'hui installables via OCI comme:
